@@ -1,0 +1,36 @@
+{
+    "name": "Change Url",
+    "id": "change_url_app",
+    "description": {
+        "en": "Dummy app to test change_url"
+    },
+    "license": "GPL-3+",
+    "maintainer": {
+        "name": "bram",
+        "email": "cortex@worlddomination.be",
+        "url": "http://worlddomination.be"
+    },
+    "requirements": {
+        "yunohost": ">> 2.4.0"
+    },
+    "multi_instance": false,
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "ask": {
+                    "en": "Choose a domain"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "ask": {
+                    "en": "Choose a path"
+                },
+                "example": "/",
+                "default": "/"
+            }
+        ]
+    }
+}

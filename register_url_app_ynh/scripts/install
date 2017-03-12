@@ -1,0 +1,34 @@
+set -eux
+
+app=$YNH_APP_INSTANCE_NAME
+number=$YNH_APP_INSTANCE_NUMBER
+
+# Retrieve arguments
+domain=$YNH_APP_ARG_DOMAIN
+path=$YNH_APP_ARG_PATH
+
+# Check domain/path availability
+sudo yunohost app registerurl $app $domain $path
+if [[ ! $? -eq 0 ]]; then
+    exit 1
+fi
+
+if [[ "$path" == "" ]]; then
+  sed -i "s@PATHTOCHANGE@/@g" ../conf/nginx.conf
+else
+  sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
+fi
+
+sudo sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
+
+sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+
+sudo mkdir -p /var/www/$app
+
+sudo cp ../conf/index.html /var/www/$app
+
+# Reload Nginx and regenerate SSOwat conf
+sudo service nginx reload
+
+sudo yunohost app setting $app unprotected_uris -v "/"
+sudo yunohost app ssowatconf

@@ -1,0 +1,25 @@
+set -eux
+
+app=$YNH_APP_INSTANCE_NAME
+number=$YNH_APP_INSTANCE_NUMBER
+
+# Retrieve arguments
+old_domain=$YNH_APP_OLD_DOMAIN
+old_path=$YNH_APP_OLD_PATH
+old_path_trimed=$YNH_APP_OLD_PATH_TRIMED
+
+new_domain=$YNH_APP_NEW_DOMAIN
+new_path=$YNH_APP_NEW_PATH
+new_path_trimed=$YNH_APP_NEW_PATH_TRIMED
+
+nginx_conf_path=/etc/nginx/conf.d/$old_domain.d/$app.conf
+
+if [[ "$new_path" == "" ]]; then
+  sudo sed -i "s@location .\+ {@location / {@g" $nginx_conf_path
+else
+  sudo sed -i "s@location .\+ {@location $new_path_trimed {@g" $nginx_conf_path
+fi
+
+if [ $old_domain != $new_domain ]; then
+    sudo mv $nginx_conf_path /etc/nginx/conf.d/$new_domain.d/$app.conf
+fi
