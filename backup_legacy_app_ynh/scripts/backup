@@ -1,0 +1,28 @@
+#!/bin/bash
+set -eu
+
+# Source app helpers
+source /usr/share/yunohost/helpers
+
+# Retrieve parameters
+
+# Backup directory (location dedicated to the app)
+backup_dir=$1
+# App instance name
+app=$2
+domain=$(ynh_app_setting_get $app domain)
+
+# Copy the app files (explicitly specifying the backup dir)
+sudo mkdir -p "${backup_dir}/var/www"
+ynh_backup /var/www/$app "${backup_dir}/var/www/$app"
+
+# Copy the conf files (without explicitly specifying the backup dir)
+sudo mkdir -p "${backup_dir}/conf"
+ynh_backup /etc/nginx/conf.d/$domain.d/$app.conf "conf/nginx.conf"
+
+# Copy the custom file as if it was a big file (1 at the end)
+ynh_backup /etc/importantfile "${backup_dir}/importantfile" 1
+
+# Backup db
+root_pwd=$(sudo cat /etc/yunohost/mysql)
+sudo su -c "mysqldump -u root -p$root_pwd --no-create-db $app > ${backup_dir}/db.sql"
