@@ -1,0 +1,19 @@
+set -eux
+
+# Source app helpers
+source /usr/share/yunohost/helpers
+
+# Recover arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$(sudo yunohost app setting $app domain)
+
+sudo rm -rf /var/www/$app
+sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+sudo rm -f /etc/importantfile
+
+db_user=$app
+ynh_mysql_drop_db $db_user
+ynh_mysql_drop_user $db_user
+
+sudo service nginx reload
+sudo yunohost app ssowatconf
