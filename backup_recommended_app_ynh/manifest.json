@@ -30,6 +30,14 @@
                 },
                 "example": "/",
                 "default": "/"
+            },
+            {
+                "name": "helper_to_test",
+                "ask": {
+                    "en": "Choose the restore helper to use for the test"
+                },
+                "example": "ynh_restore",
+                "default": "ynh_restore_file"
             }
         ]
     }
