@@ -10,15 +10,22 @@ app=$2
 # Get old parameter of the app
 domain=$(ynh_app_setting_get $app domain)
 path=$(ynh_app_setting_get $app path)
+helper_to_test=$(ynh_app_setting_get $app helper_to_test)
 
-# Restore www directory
-ynh_restore_file /var/www/$app
+# Test the 2 alternatives to restore
+if [ "$helper_to_test" == "ynh_restore" ]; then
+    # Restore all backuped files
+    ynh_restore
+else
+    # Restore www directory
+    ynh_restore_file /var/www/$app
 
-# Restore nginx conf
-ynh_restore_file /etc/nginx/conf.d/$domain.d/$app.conf
+    # Restore nginx conf
+    ynh_restore_file /etc/nginx/conf.d/$domain.d/$app.conf
 
-# Restore custom file (with different source/destinations)
-ynh_restore_file /etc/yoloswag /etc/importantfile
+    # Restore custom file (with different source/destinations)
+    ynh_restore_file /etc/yoloswag /etc/importantfile
+fi
 
 # Restore the database 
 db_user=$app

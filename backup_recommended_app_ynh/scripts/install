@@ -5,12 +5,16 @@ app=$YNH_APP_INSTANCE_NAME
 number=$YNH_APP_INSTANCE_NUMBER
 domain=$YNH_APP_ARG_DOMAIN
 path=$YNH_APP_ARG_PATH
+helper_to_test=$YNH_APP_ARG_HELPER_TO_TEST
 
 # Source app helpers
 source /usr/share/yunohost/helpers
 
 # Check domain/path availability
 sudo yunohost app checkurl $domain/$path -a $app
+
+# Register mode of restoration
+ynh_app_setting_set $app helper_to_test $helper_to_test
 
 # Add config for nginx
 sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
