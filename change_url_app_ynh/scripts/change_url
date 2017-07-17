@@ -12,11 +12,11 @@ new_path=$YNH_APP_NEW_PATH
 nginx_conf_path=/etc/nginx/conf.d/$old_domain.d/$app.conf
 
 if [[ "$new_path" == "" ]]; then
-  sudo sed -i "s@location .\+ {@location / {@g" $nginx_conf_path
+  sed -i "s@location .\+ {@location / {@g" $nginx_conf_path
 else
-  sudo sed -i "s@location .\+ {@location $new_path {@g" $nginx_conf_path
+  sed -i "s@location .\+ {@location $new_path {@g" $nginx_conf_path
 fi
 
 if [ $old_domain != $new_domain ]; then
-    sudo mv $nginx_conf_path /etc/nginx/conf.d/$new_domain.d/$app.conf
+    mv $nginx_conf_path /etc/nginx/conf.d/$new_domain.d/$app.conf
 fi
