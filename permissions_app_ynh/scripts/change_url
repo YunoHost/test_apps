@@ -1,0 +1,24 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+# Stop script if errors
+ynh_abort_if_errors
+
+# Retrive arguments
+app=$YNH_APP_INSTANCE_NAME
+old_domain=$YNH_APP_OLD_DOMAIN
+old_path_url=$(ynh_normalize_url_path ${YNH_APP_OLD_PATH})
+domain=$YNH_APP_NEW_DOMAIN
+path_url=$(ynh_normalize_url_path ${YNH_APP_NEW_PATH})
+
+ynh_permission_del_path --app $app --permission "admin" --url "$old_domain$old_path_url/admin"
+ynh_permission_del_path --app $app --permission "dev" --url "$old_domain$old_path_url/dev"
+
+ynh_permission_add_path --app $app --permission "admin" --url "$domain$path_url/admin"
+ynh_permission_add_path --app $app --permission "dev" --url "$domain$path_url/dev"
