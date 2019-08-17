@@ -6,9 +6,6 @@ number=$YNH_APP_INSTANCE_NUMBER
 domain=$YNH_APP_ARG_DOMAIN
 path=$YNH_APP_ARG_PATH
 
-# Source app helpers
-source /usr/share/yunohost/helpers
-
 # Check domain/path availability
 sudo yunohost app checkurl $domain/$path -a $app
 
@@ -21,11 +18,17 @@ sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 sudo mkdir -p /var/www/$app
 sudo cp ../conf/index.html /var/www/$app
 
+sudo yunohost app checkport 12345
+if [[ ! $? -eq 0 ]]; then
+   echo "Ogod noez the port 12345 aint available!!"
+   exit 1
+fi
+
 # Create a dummy mysql db
 db_user=$app
 db_pwd="yoloswag42"
-ynh_mysql_create_db "$db_user" "$db_user" $db_pwd
-ynh_app_setting_set $app mysqlpwd $db_pwd
+sudo yunohost app initdb "$db_user" -p $db_pwd
+sudo yunohost app setting $app mysqlpwd -v $db_pwd
 
 # Other custom stuff
 sudo cp ../sources/importantfile /etc/
