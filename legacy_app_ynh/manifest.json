@@ -1,8 +1,8 @@
 {
-    "name": "Backup (legacy-way) Test App",
-    "id": "backup_legacy_app",
+    "name": "Legacy application",
+    "id": "legacy_app",
     "description": {
-        "en": "App to test the 'legacy' ways of doing backups"
+        "en": "Legacy app to test backward compatibility for installation and backup/restore"
     },
     "license": "GPL-3+",
     "maintainer": {
@@ -28,8 +28,8 @@
                 "ask": {
                     "en": "Choose a path"
                 },
-                "example": "/",
-                "default": "/"
+                "example": "/legacy",
+                "default": "/legacy"
             }
         ]
     }
