@@ -8,7 +8,7 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$(sudo yunohost app setting $app domain)
 
 sudo rm -rf /var/www/$app
-sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+sudo rm /etc/nginx/conf.d/$domain.d/$app.conf
 sudo rm -f /etc/importantfile
 
 db_user=$app

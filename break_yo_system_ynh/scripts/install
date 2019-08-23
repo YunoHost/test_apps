@@ -1,0 +1,20 @@
+set -eux
+
+source /usr/share/yunohost/helpers
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$YNH_APP_ARG_DOMAIN
+breakwhat=$YNH_APP_ARG_BREAKWHAT
+
+ynh_app_setting_set $app domain $domain
+ynh_app_setting_set $app breakwhat $breakwhat
+
+if [[ $breakwhat == "install" ]] || [[ $breakwhat == "everything" ]]
+then
+    echo "; WTF ; ?!() {{{{" > /etc/nginx/conf.d/$domain.d/$app.conf
+    service nginx restart || true # What could go wrong lol
+else
+    touch /etc/nginx/conf.d/$domain.d/$app.conf
+    service nginx reload
+fi

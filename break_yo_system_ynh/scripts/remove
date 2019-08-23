@@ -1,0 +1,16 @@
+set -eux
+
+source /usr/share/yunohost/helpers
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$(sudo yunohost app setting $app domain)
+breakwhat=$(sudo yunohost app setting $app breakwhat)
+
+rm /etc/nginx/conf.d/$domain.d/$app.conf
+service nginx reload
+
+if [[ $breakwhat == "remove" ]] || [[ $breakwhat == "everything" ]]
+then
+    service nginx stop
+fi

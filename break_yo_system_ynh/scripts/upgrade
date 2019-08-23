@@ -1,0 +1,16 @@
+set -eux
+source /usr/share/yunohost/helpers
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$(sudo yunohost app setting $app domain)
+breakwhat=$(sudo yunohost app setting $app breakwhat)
+
+if [[ $breakwhat == "upgrade" ]] || [[ $breakwhat == "everything" ]]
+then
+    echo "; WTF ; ?!() {{{{" > /etc/nginx/conf.d/$domain.d/$app.conf
+    service nginx restart || true # What could go wrong lol
+else
+    rm /etc/nginx/conf.d/$domain.d/$app.conf
+    service nginx reload
+fi
