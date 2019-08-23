@@ -33,6 +33,9 @@ sudo su -c "mysql -u $db_user -p$db_pwd $app < ${restore_dir}/db.sql"
 # even if restore_dir is in read-only as long as there's no set -eu activated...
 sudo rm ${restore_dir}/db.sql
 
+# Set the app as public
+sudo yunohost app setting $app unprotected_uris -v "/"
+
 # Reload/reconfigure services
 sudo service nginx reload
 sudo yunohost app ssowatconf

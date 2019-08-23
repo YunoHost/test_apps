@@ -15,7 +15,7 @@ sudo sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
 sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
 
 # Make directory for app web data
-sudo mkdir -p /var/www/$app
+sudo mkdir /var/www/$app
 sudo cp ../conf/index.html /var/www/$app
 
 sudo yunohost app checkport 12345
@@ -32,6 +32,9 @@ sudo yunohost app setting $app mysqlpwd -v $db_pwd
 
 # Other custom stuff
 sudo cp ../sources/importantfile /etc/
+
+# Set the app as public
+sudo yunohost app setting $app unprotected_uris -v "/"
 
 # Reload Nginx and regenerate SSOwat conf
 sudo service nginx reload
