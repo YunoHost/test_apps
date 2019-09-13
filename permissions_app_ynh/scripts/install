@@ -20,8 +20,8 @@ admin_user=$YNH_APP_ARG_ADMIN
 ynh_webpath_available $domain $path_url || ynh_die "$domain$path_url is not available, please use an other domain or path."
 ynh_webpath_register $app $domain $path_url
 
-ynh_permission_create --app $app --permission "admin" --defaultdisallow --urls "$domain$path_url/admin"
-yunohost user permission add $app -p "admin" -u $admin_user
+ynh_permission_create --permission "admin" --urls "$domain$path_url/admin"
+ynh_permission_update --permission "admin" --add "$admin_user"
 
-ynh_permission_create --app $app --permission "dev"
-ynh_permission_add_path --app $app --permission "dev" --url "$domain$path_url/dev"
+ynh_permission_create --permission "dev"
+ynh_permission_urls --permission "dev" --add "$domain$path_url/dev"

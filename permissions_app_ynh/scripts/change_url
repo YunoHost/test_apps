@@ -17,8 +17,5 @@ old_path_url=$(ynh_normalize_url_path ${YNH_APP_OLD_PATH})
 domain=$YNH_APP_NEW_DOMAIN
 path_url=$(ynh_normalize_url_path ${YNH_APP_NEW_PATH})
 
-ynh_permission_del_path --app $app --permission "admin" --url "$old_domain$old_path_url/admin"
-ynh_permission_del_path --app $app --permission "dev" --url "$old_domain$old_path_url/dev"
-
-ynh_permission_add_path --app $app --permission "admin" --url "$domain$path_url/admin"
-ynh_permission_add_path --app $app --permission "dev" --url "$domain$path_url/dev"
+ynh_permission_urls --permission "admin" --remove "$old_domain$old_path_url/admin" --add "$domain$path_url/admin"
+ynh_permission_urls --permission "dev"   --remove "$old_domain$old_path_url/dev"   --add "$domain$path_url/dev"
