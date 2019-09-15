@@ -8,7 +8,7 @@ domain=$(sudo yunohost app setting $app domain)
 breakwhat=$(sudo yunohost app setting $app breakwhat)
 
 rm /etc/nginx/conf.d/$domain.d/$app.conf
-service nginx reload
+service nginx restart
 
 if [[ $breakwhat == "remove" ]] || [[ $breakwhat == "everything" ]]
 then

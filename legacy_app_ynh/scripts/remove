@@ -15,5 +15,5 @@ sudo rm -rf /var/www/$app
 sudo rm /etc/nginx/conf.d/$domain.d/$app.conf
 sudo rm -f /etc/importantfile
 
-sudo service nginx reload
+sudo service nginx restart
 sudo yunohost app ssowatconf
