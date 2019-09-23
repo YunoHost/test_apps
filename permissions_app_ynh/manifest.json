@@ -34,6 +34,19 @@
                 "default": "/permissions_app"
             },
             {
+                "name": "is_public",
+                "type": "boolean",
+                "ask": {
+                    "en": "Is it a public application?",
+                    "fr": "Est-ce une application publique ?"
+                },
+                "help": {
+                    "en": "A private app will only be accessible to logged-in users",
+                    "fr": "Une app privée sera seulement accessible aux utilisateurs connectés"
+                },
+                "default": true
+            },
+            {
                 "name": "admin",
                 "type": "user",
                 "ask": {

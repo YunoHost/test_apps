@@ -15,13 +15,22 @@ app=$YNH_APP_INSTANCE_NAME
 domain=$YNH_APP_ARG_DOMAIN
 path_url=$(ynh_normalize_url_path $YNH_APP_ARG_PATH)
 admin_user=$YNH_APP_ARG_ADMIN
+is_public=$YNH_APP_ARG_IS_PUBLIC
 
 # Check domain/path availability
 ynh_webpath_available $domain $path_url || ynh_die "$domain$path_url is not available, please use an other domain or path."
 ynh_webpath_register $app $domain $path_url
 
-ynh_permission_create --permission "admin" --urls "$domain$path_url/admin"
+ynh_permission_create --permission "admin" --urls "/admin"
 ynh_permission_update --permission "admin" --add "$admin_user"
 
 ynh_permission_create --permission "dev"
-ynh_permission_urls --permission "dev" --add "$domain$path_url/dev"
+ynh_permission_urls --permission "dev" --add "/dev"
+
+#=================================================
+# SETUP SSOWAT
+#=================================================
+ynh_script_progression --message="Configuring SSOwat..." --weight=1
+
+# Make app public if necessary or protect it
+[ $is_public -eq 0 ] || ynh_permission_update --permission "main" --remove "all_users" --add "visitors"

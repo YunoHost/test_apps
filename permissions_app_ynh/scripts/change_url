@@ -10,12 +10,4 @@ source /usr/share/yunohost/helpers
 # Stop script if errors
 ynh_abort_if_errors
 
-# Retrive arguments
-app=$YNH_APP_INSTANCE_NAME
-old_domain=$YNH_APP_OLD_DOMAIN
-old_path_url=$(ynh_normalize_url_path ${YNH_APP_OLD_PATH})
-domain=$YNH_APP_NEW_DOMAIN
-path_url=$(ynh_normalize_url_path ${YNH_APP_NEW_PATH})
-
-ynh_permission_urls --permission "admin" --remove "$old_domain$old_path_url/admin" --add "$domain$path_url/admin"
-ynh_permission_urls --permission "dev"   --remove "$old_domain$old_path_url/dev"   --add "$domain$path_url/dev"
+# Nothing to do ... Permission using relative urls don't need to be changed, only the domain/path setting (handled in the core)
