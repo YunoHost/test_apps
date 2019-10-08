@@ -1,0 +1,26 @@
+set -eux
+
+# Source app helpers
+source /usr/share/yunohost/helpers
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$YNH_APP_ARG_DOMAIN
+path="/"
+
+# Check domain/path availability
+ynh_webpath_register $app $domain $path
+
+# Add config for nginx
+sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
+cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
+
+# Make directory for app web data
+mkdir /var/www/$app
+cp ../conf/index.html /var/www/$app
+
+# Set the app as public
+yunohost app setting $app unprotected_uris -v "/"
+
+# Reload Nginx and regenerate SSOwat conf
+systemctl reload nginx
