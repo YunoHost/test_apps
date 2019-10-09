@@ -21,11 +21,10 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 ynh_webpath_available $domain $path_url || ynh_die "$domain$path_url is not available, please use an other domain or path."
 ynh_webpath_register $app $domain $path_url
 
-ynh_permission_create --permission "admin" --urls "/admin"
+ynh_permission_create --permission "admin" --url "/admin"
 ynh_permission_update --permission "admin" --add "$admin_user"
 
-ynh_permission_create --permission "dev"
-ynh_permission_urls --permission "dev" --add "/dev"
+ynh_permission_create --permission "dev" --url "/dev"
 
 #=================================================
 # SETUP SSOWAT
