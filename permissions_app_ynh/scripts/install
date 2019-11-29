@@ -31,4 +31,4 @@ ynh_permission_create --permission "dev" --url "/dev"
 ynh_script_progression --message="Configuring SSOwat..." --weight=1
 
 # Make app public if necessary or protect it
-[ $is_public -eq 0 ] || ynh_permission_update --permission "main" --remove "all_users" --add "visitors"
+[ $is_public -eq 0 ] || ynh_permission_update --permission "main" --add "visitors"
