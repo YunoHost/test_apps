@@ -1,0 +1,22 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+# Stop script if errors
+ynh_abort_if_errors
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+admin_user=$(ynh_app_setting_get --app $app --key admin_user)
+
+#=================================================
+# UPDATE PERMISSIONS
+#=================================================
+
+ynh_permission_update --permission admin --remove $admin_user --protected false
+ynh_permission_update --permission dev --add $admin_user --protected true
