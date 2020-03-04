@@ -10,6 +10,9 @@ is_public=$YNH_APP_ARG_IS_PUBLIC
 # Check domain/path availability
 sudo yunohost app checkurl $domain/$path -a $app
 
+# Check folder availability
+test ! -e "/var/www/$app/"
+
 # Add config for nginx
 sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
 sudo sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
