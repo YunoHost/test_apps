@@ -13,10 +13,16 @@ ynh_abort_if_errors
 # Retrieve arguments
 app=$YNH_APP_INSTANCE_NAME
 admin_user=$(ynh_app_setting_get --app $app --key admin_user)
+domain=$(ynh_app_setting_get --app $app --key domain)
+domain_2=$(ynh_app_setting_get --app $app --key domain_2)
 
 #=================================================
 # UPDATE PERMISSIONS
 #=================================================
 
-ynh_permission_update --permission admin --remove $admin_user --protected false
-ynh_permission_update --permission dev --add $admin_user --protected true
+ynh_permission_update --permission admin --remove $admin_user --show_tile false --protected false
+ynh_permission_update --permission dev --add $admin_user --label "New tile" --protected true --show_tile true 
+
+ynh_permission_url --permission admin --clear_urls --auth_header false
+ynh_permission_url --permission dev --remove_url "$domain_2/" --auth_header true
+ynh_permission_url --permission test --url "/mytest" --add_url "/otherTest" "$domain_2/bob"
