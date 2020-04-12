@@ -24,5 +24,4 @@ ynh_backup /etc/nginx/conf.d/$domain.d/$app.conf
 ynh_backup /etc/importantfile /etc/yoloswag
 
 # Backup db
-root_pwd=$(sudo cat /etc/yunohost/mysql)
-sudo su -c "mysqldump -u root -p$root_pwd --no-create-db $app > ${backup_dir}/db.sql"
+ynh_mysql_dump_db $app > "${backup_dir}/db.sql"
