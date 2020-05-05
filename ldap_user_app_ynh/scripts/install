@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+# Stop script if errors
+ynh_abort_if_errors
+
+# Retrieve arguments
+app=$YNH_APP_INSTANCE_NAME
+domain=$YNH_APP_ARG_DOMAIN
+
+ynh_ldap_user_create --password="RAND0MP4sSw0RO" --home_dir=/var/www/$app --mail=$app@$domain --use_shell
