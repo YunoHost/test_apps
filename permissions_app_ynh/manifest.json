@@ -25,6 +25,14 @@
                 "example": "domain.org"
             },
             {
+                "name": "domain_2",
+                "type": "domain",
+                "ask": {
+                    "en": "Choose a second domain for permissions_app"
+                },
+                "example": "domain.org"
+            },
+            {
                 "name": "path",
                 "type": "path",
                 "ask": {
