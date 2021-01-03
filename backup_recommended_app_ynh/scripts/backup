@@ -1,27 +1,19 @@
 #!/bin/bash
 set -eu
 
-# Source app helpers
 source /usr/share/yunohost/helpers
 
-# Retrieve parameters
-
-# Backup directory (location dedicated to the app)
-backup_dir=$1
-# App instance name
-app=$2
+app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get $app domain)
 
 # Backup the app files
-#sudo mkdir -p "${backup_dir}/var/www"
 ynh_backup /var/www/$app
 
 # Backup the conf files
-#sudo mkdir -p "${backup_dir}/conf"
 ynh_backup /etc/nginx/conf.d/$domain.d/$app.conf
 
 # Backup the custom file to a different location
 ynh_backup /etc/importantfile /etc/yoloswag
 
 # Backup db
-ynh_mysql_dump_db $app > "${backup_dir}/db.sql"
+ynh_mysql_dump_db $app > db.sql

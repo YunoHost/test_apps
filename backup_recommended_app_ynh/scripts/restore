@@ -1,13 +1,9 @@
 #!/bin/bash
 set -eu
 
-# Source app helpers
 source /usr/share/yunohost/helpers
 
-restore_dir=$1
-app=$2
-
-# Get old parameter of the app
+app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get $app domain)
 path=$(ynh_app_setting_get $app path)
 helper_to_test=$(ynh_app_setting_get $app helper_to_test)
@@ -29,10 +25,9 @@ fi
 
 # Restore the database 
 db_user=$app
+db_name=$app
 db_pwd=$(ynh_app_setting_get $app mysqlpwd)
-ynh_mysql_create_db $db_user $db_user $db_pwd
-sudo su -c "mysql -u $db_user -p$db_pwd $app < ${restore_dir}/db.sql"
+ynh_mysql_setup_db --db_user=$db_name --db_name=$db_name --db_pwd=$db_pwd
+ynh_mysql_connect_as --user=$db_name --password=$db_pwd --database=$db_name < ./db.sql
 
-# Reload/reconfigure services
-sudo service nginx reload
-sudo yunohost app ssowatconf
+systemctl reload nginx
