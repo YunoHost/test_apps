@@ -1,5 +1,8 @@
 set -eux
 
+# Source app helpers
+source /usr/share/yunohost/helpers
+
 app=$YNH_APP_INSTANCE_NAME
 number=$YNH_APP_INSTANCE_NUMBER
 
