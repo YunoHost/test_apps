@@ -1,8 +1,11 @@
 # No set -eu for this particular app restore script (see comment near the end)
 #set -eu
 
-restore_dir=$1
-app=$2
+# Source app helpers
+source /usr/share/yunohost/helpers
+
+restore_dir=.
+app=$YNH_APP_INSTANCE_NAME
 
 # Get old parameter of the app
 domain=$(sudo yunohost app setting $app domain)
@@ -18,8 +21,7 @@ sudo cp -a "${restore_dir}/conf/nginx.conf" $nginx_conf
 # Restore custom file
 sudo cp -a "${restore_dir}/importantfile" /etc/importantfile
 
-sudo yunohost app checkport 12345
-if [[ ! $? -eq 0 ]]; then
+if ! ynh_port_available 12345; then
    echo "Ogod noez the port 12345 aint available!!"
    exit 1
 fi
@@ -27,8 +29,9 @@ fi
 # Restore the database 
 db_user=$app
 db_pwd=$(sudo yunohost app setting $app mysqlpwd)
-sudo yunohost app initdb $db_user -p $db_pwd
-sudo su -c "mysql -u $db_user -p$db_pwd $app < ${restore_dir}/db.sql"
+ynh_mysql_setup_db --db_user=$db_user --db_name=$db_user --db_pwd=$db_pwd
+ynh_mysql_connect_as --user=$db_user --password=$db_user --database=$db_name < ${restore_dir}/db.sql
+
 # Some scripts wanted to delete the db.sql... This won't make the script crash
 # even if restore_dir is in read-only as long as there's no set -eu activated...
 sudo rm ${restore_dir}/db.sql

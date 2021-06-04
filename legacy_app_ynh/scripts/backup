@@ -7,9 +7,9 @@ source /usr/share/yunohost/helpers
 # Retrieve parameters
 
 # Backup directory (location dedicated to the app)
-backup_dir=$1
+backup_dir=.
 # App instance name
-app=$2
+app=$YNH_APP_INSTANCE_NAME
 domain=$(ynh_app_setting_get $app domain)
 
 # Copy the app files (explicitly specifying the backup dir)
