@@ -11,7 +11,7 @@ helper_to_test=$YNH_APP_ARG_HELPER_TO_TEST
 source /usr/share/yunohost/helpers
 
 # Check domain/path availability
-sudo yunohost app checkurl $domain/$path -a $app
+ynh_webpath_register --app=$app --domain=$domain --path_url=$path
 
 # Register mode of restoration
 ynh_app_setting_set $app helper_to_test $helper_to_test
