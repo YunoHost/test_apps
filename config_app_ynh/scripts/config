@@ -6,7 +6,6 @@
 # IMPORT GENERIC HELPERS
 #=================================================
 
-source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
@@ -56,13 +55,4 @@ ynh_panel_apply() {
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-# Please don't change that code.
-# You can overwrite these functions if you need it
-#=================================================
-
-ynh_panel_init
-case $1 in
-  show) ynh_panel_show;;
-  apply) ynh_panel_validate && ynh_panel_apply;;
-esac
-
+ynh_panel_run
