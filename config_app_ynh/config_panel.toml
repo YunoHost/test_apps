@@ -137,8 +137,8 @@ name = "Main section"
         [main.generic.helpLink]
         ask = "Here we add an help link"
         type = "string"
-        help.href = "https://yunohost.org/doc"
-        help.text = "Yunohost Doc"
+        helpLink.href = "https://yunohost.org/doc"
+        helpLink.text = "Yunohost Doc"
 
         [main.generic.visibleIf]
         ask = "Display if helpLink question is filled"
@@ -174,7 +174,7 @@ name = "Source section"
     [source.ini]
     name = "INI"
         
-        [conf.ini.arg4]
+        [source.ini.arg4]
         ask = "Save arg4 in INI"
         type = "string"
         source = "__FINALPATH__/test.ini"
