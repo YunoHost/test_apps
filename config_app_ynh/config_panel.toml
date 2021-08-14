@@ -1,0 +1,212 @@
+version = "0.1"
+name = "Configuration panel"
+
+[main]
+name = "Main section"
+
+    [main.components]
+    name = "Components"
+        
+        [main.components.boolean]
+        ask = "Put a boolean"
+        type = "boolean"
+        choices = ["on", "off"]
+        default = "off"
+        
+        [main.components.number]
+        ask = "Put a number"
+        type = "number"
+        min = 1
+        max = 100
+
+        [main.components.range]
+        ask = "Put a range"
+        type = "range"
+        min = 1
+        max = 100
+        
+        [main.components.str]
+        ask = "Put a string with yunohost word"
+        type = "string"
+        pattern = "yunohost"
+        
+        [main.components.text]
+        ask = "Put a text"
+        type = "text"
+        
+        [main.components.password]
+        ask = "Put a password"
+        type = "password"
+
+        [main.components.custom_path]
+        ask = "Put a path"
+        type = "path"
+        
+        [main.components.email]
+        ask = "Put a email"
+        type = "email"
+        
+        [main.components.url]
+        ask = "Put a url"
+        type = "url"
+        
+        [main.components.date]
+        ask = "Put a date"
+        type = "date"
+        
+        [main.components.time]
+        ask = "Put a time"
+        type = "time"
+        
+        [main.components.color]
+        ask = "Put a color"
+        type = "color"
+        
+        [main.components.select]
+        ask = "Choose an option"
+        type = "select"
+        choices = ["option1", "option2", "option3"]
+        
+        [main.components.custom_domain]
+        ask = "Put a domain"
+        type = "domain"
+        
+        [main.components.user]
+        ask = "Put a user"
+        type = "user"
+        
+        [main.components.tags]
+        ask = "Put some tags"
+        type = "tags"
+        
+        [main.components.file]
+        ask = "Put a file"
+        type = "file"
+        accept = ".cube"
+
+    [main.messages]
+    name = "Read only components"
+        
+        [main.messages.success]
+        ask = "This is a success message"
+        type = "success"
+        
+        [main.messages.info]
+        ask = "This is an info message"
+        type = "info"
+        
+        [main.messages.warning]
+        ask = "This is an warning message"
+        type = "warning"
+        
+        [main.messages.error]
+        ask = "This is an error message"
+        type = "error"
+        
+        [main.messages.display_text]
+        ask = "This is a simple text"
+        type = "display_text"
+        
+        [main.messages.markdown]
+        ask = "This is a **markdown** text"
+        type = "markdown"
+    
+    [main.generic]
+    name = "Generic options"
+        
+        [main.generic.default]
+        ask = "This is a question with a default value"
+        type = "string"
+        default = "Camille"
+        
+        [main.generic.example]
+        ask = "This is a question with an example value"
+        type = "string"
+        example = "Camille"
+        
+        [main.generic.optional]
+        ask = "This is an optional value"
+        type = "string"
+        optional = true
+        
+        [main.generic.help]
+        ask = "Here we add some help"
+        type = "string"
+        help = "You can feel this question with your keyboard (yes i know it's very useful)"
+        
+        [main.generic.helpLink]
+        ask = "Here we add an help link"
+        type = "string"
+        help.href = "https://yunohost.org/doc"
+        help.text = "Yunohost Doc"
+
+        [main.generic.visibleIf]
+        ask = "Display if helpLink question is filled"
+        type = "string"
+        visibleIf = "helpLink"
+
+[source]
+name = "Source section"
+    
+    [source.settings]
+    name = "App settings"
+        
+        [source.settings.arg1]
+        ask = "Save app settings arg1"
+        type = "string"
+
+    [source.yml]
+    name = "YAML"
+        
+        [source.yml.arg2]
+        ask = "Save arg2 in YAML"
+        type = "string"
+        source = "__FINALPATH__/test.yml"
+        
+    [source.json]
+    name = "JSON"
+        
+        [source.json.arg3]
+        ask = "Save arg3 in JSON"
+        type = "string"
+        source = "__FINALPATH__/test.json"
+        
+    [source.ini]
+    name = "INI"
+        
+        [conf.ini.arg4]
+        ask = "Save arg4 in INI"
+        type = "string"
+        source = "__FINALPATH__/test.ini"
+        
+    [source.php]
+    name = "PHP"
+        
+        [source.php.arg5]
+        ask = "Save arg5 in PHP file"
+        type = "string"
+        source = "__FINALPATH__/test.php"
+        
+    [source.python]
+    name = "Python"
+        
+        [source.python.arg6]
+        ask = "Save arg6 in python file"
+        type = "string"
+        source = "__FINALPATH__/test.py"
+
+    [source.file]
+    name = "File"
+        
+        [source.file.arg7]
+        ask = "Save a cube file"
+        type = "file"
+        accept = ".cube"
+        source = "__FINALPATH__/test.cube"
+
+    [source.function]
+    name = "function"
+        
+        [source.function.arg8]
+        ask = "Custom validate and save arg8 password"
+        type = "password"

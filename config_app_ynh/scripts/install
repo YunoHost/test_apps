@@ -1,0 +1,10 @@
+set -eux
+
+# Source app helpers
+source /usr/share/yunohost/helpers
+
+app=$YNH_APP_INSTANCE_NAME
+
+mkdir -p /var/www/$app
+
+cp ../conf/* /var/www/$app/

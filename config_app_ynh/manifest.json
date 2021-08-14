@@ -1,0 +1,36 @@
+{
+    "name": "Config panel",
+    "id": "config_app",
+    "description": {
+        "en": "Dummy app to test config panel"
+    },
+    "license": "GPL-3+",
+    "maintainer": {
+        "name": "ljf",
+        "email": "ljf+config_app@reflexlibre.net",
+        "url": "http://reflexlibre.net"
+    },
+    "requirements": {
+        "yunohost": ">> 4.2.7"
+    },
+    "multi_instance": false,
+    "arguments": {
+        "install" : [
+            {
+                "name": "domain",
+                "ask": {
+                    "en": "Choose a domain"
+                },
+                "example": "domain.org"
+            },
+            {
+                "name": "path",
+                "ask": {
+                    "en": "Choose a path"
+                },
+                "example": "/",
+                "default": "/"
+            }
+        ]
+    }
+}

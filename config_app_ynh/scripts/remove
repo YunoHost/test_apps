@@ -1,0 +1,7 @@
+set -eux
+
+# See comments in install script
+app=$YNH_APP_INSTANCE_NAME
+
+rm -rf /var/www/$app
+
