@@ -8,11 +8,11 @@
 
 source /usr/share/yunohost/helpers
 
+ynh_abort_if_errors
+
 #=================================================
 # RETRIEVE ARGUMENTS
 #=================================================
-
-app=$YNH_APP_INSTANCE_NAME
 
 final_path=$(ynh_app_setting_get $app final_path)
 
@@ -28,7 +28,7 @@ get__arg8() {
 # SPECIFIC VALIDATORS FOR TOML SHORT KEYS
 #=================================================
 validate__arg8() {
-    [[ "$#arg8" -lt 8 ]] &&
+    [[ "${#arg8}" -lt 8 ]] &&
         echo 'Too short password'
 }
 
@@ -36,13 +36,11 @@ validate__arg8() {
 # SPECIFIC SETTERS FOR TOML SHORT KEYS
 #=================================================
 set__arg8() {
-    if [ -z "$arg8" ]
+    if [ -z "${arg8}" ]
     then
         python -c "import crypt; print(crypt.crypt(\"${arg8}\", \"\$6\$saltsalt\$\"))" > $final_path/password
     fi
 }
-
-
 
 #=================================================
 # OVERWRITING APPLY STEP 
@@ -55,4 +53,4 @@ ynh_panel_apply() {
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-ynh_panel_run
+ynh_panel_run $1
