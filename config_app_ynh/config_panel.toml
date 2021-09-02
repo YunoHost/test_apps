@@ -1,11 +1,10 @@
-version = "0.1"
-name = "Configuration panel"
+version = "1.0"
 
 [main]
 name = "Main panel"
-
+services = ["nginx"]
     [main.components]
-    name = "Components"
+    name = ""
         
         [main.components.boolean]
         ask = "Put a boolean"
@@ -20,13 +19,13 @@ name = "Main panel"
         [main.components.range]
         ask = "Put a range"
         type = "range"
-        min = 1
+        min = 0
         max = 100
+        step = 10
         
         [main.components.str]
-        ask = "Put a string with yunohost word"
+        ask = "Put a string"
         type = "string"
-        pattern = "yunohost"
         
         [main.components.text]
         ask = "Put a text"
@@ -63,8 +62,9 @@ name = "Main panel"
         [main.components.select]
         ask = "Choose an option"
         type = "select"
-        choices = ["option1", "option2", "option3"]
-        default = "option1"
+        choices.option1 = "Plop1"
+        choices.option2 = "Plop2"
+        choices.option3 = "Plop3"
         
         [main.components.domain]
         ask = "Put a domain"
@@ -75,32 +75,47 @@ name = "Main panel"
         type = "user"
         
         [main.components.tags]
-        ask = "Put some tags"
+        ask = "Put some emails"
         type = "tags"
+        placeholder = "Enter some emails separated by commas"
+        limit = 3
+        pattern.regexp = '^.+@.+$'
+        pattern.error = 'An email is required for this field'
         
-#        [main.components.file]
-#        ask = "Put a file"
-#        type = "file"
-#        accept = ".cube"
+        [main.components.tags2]
+        ask = "Put some tags from a list"
+        type = "tags"
+        choices = ['table', 'chair', 'bed', 'desk']
+        placeholder = "Add some tags"
+        icon = "bed"
+        
+        [main.components.file]
+        ask = "Put a file"
+        type = "file"
 
     [main.messages]
     name = "Read only components"
         
         [main.messages.success]
         ask = "This is a success message"
-        type = "success"
+        type = "alert"
+        style = "success"
+        icon = "beer"
         
         [main.messages.info]
         ask = "This is an info message"
-        type = "info"
+        type = "alert"
+        style = "info"
         
         [main.messages.warning]
         ask = "This is an warning message"
-        type = "warning"
+        type = "alert"
+        style = "warning"
         
         [main.messages.danger]
         ask = "This is a danger message"
-        type = "danger"
+        type = "alert"
+        style = "danger"
         
         [main.messages.display_text]
         ask = "This is a simple text"
@@ -113,10 +128,11 @@ name = "Main panel"
     [main.generic]
     name = "Generic options"
         
-        [main.generic.default]
-        ask = "This is a question with a default value"
+        [main.generic.pattern]
+        ask = "This is a question with a pattern validation"
         type = "string"
-        default = "Camille"
+        pattern.regexp = '^[A-F]\d\d$'
+        pattern.error = "Provide a room like F12 : one uppercase and 2 numbers"
         
         [main.generic.example]
         ask = "This is a question with an example value"
@@ -133,16 +149,26 @@ name = "Main panel"
         type = "string"
         help = "You can feel this question with your keyboard (yes i know it's very useful)"
         
-        [main.generic.helpLink]
+        [main.generic.helplink]
         ask = "Here we add an help link"
-        type = "string"
+        type = "select"
+        choices.question = "Display next question"
+        choices.section = "Display next section"
         helpLink.href = "https://yunohost.org/doc"
         helpLink.text = "Yunohost Doc"
 
-        [main.generic.visibleIf]
+        [main.generic.visibleif]
         ask = "Display if helpLink question is filled"
         type = "string"
-        visibleIf = "helpLink == 'plop'"
+        visibleIf = "helplink == 'question'"
+    
+    [main.ifsection]
+    name = "Section displayed only if helplink is filled"
+    visibleIf = "helplink == 'section'"
+        
+        [main.ifsection.sub]
+        ask = "Display if helpLink question is filled"
+        type = "string"
 
 [source]
 name = "Source section"
@@ -154,58 +180,63 @@ name = "Source section"
         ask = "Save app settings arg1"
         type = "string"
 
-    [source.yml]
+    [source.variable]
     name = "YAML"
         
-        [source.yml.arg2]
+        [source.variable.arg2]
         ask = "Save arg2 in YAML"
         type = "string"
-        source = "__FINALPATH__/test.yml"
+        source = ":__FINALPATH__/test.yml"
         
-    [source.json]
-    name = "JSON"
-        
-        [source.json.arg3]
+        [source.variable.arg3]
         ask = "Save arg3 in JSON"
         type = "string"
-        source = "__FINALPATH__/test.json"
+        source = ":__FINALPATH__/test.json"
         
-    [source.ini]
-    name = "INI"
-        
-        [source.ini.arg4]
+        [source.variable.arg4]
         ask = "Save arg4 in INI"
         type = "string"
-        source = "__FINALPATH__/test.ini"
+        source = ":__FINALPATH__/test.ini"
         
-    [source.php]
-    name = "PHP"
-        
-        [source.php.arg5]
+        [source.variable.arg5]
         ask = "Save arg5 in PHP file"
         type = "string"
-        source = "__FINALPATH__/test.php"
+        source = ":__FINALPATH__/test.php"
         
-    [source.python]
-    name = "Python"
-        
-        [source.python.arg6]
+        [source.variable.arg6]
         ask = "Save arg6 in python file"
         type = "string"
-        source = "__FINALPATH__/test.py"
+        source = ":__FINALPATH__/test.py"
 
-#    [source.file]
-#    name = "File"
-#        
-#        [source.file.arg7]
-#        ask = "Save a cube file"
-#        type = "file"
-#        accept = ".cube"
-#        source = "__FINALPATH__/test.cube"
+    [source.file]
+    name = "File"
+        
+        [source.file.arg7]
+        ask = "Save a cube file"
+        type = "file"
+        accept = ".cube"
+        source = "__FINALPATH__/test.cube"
+
+        [source.file.arg7b]
+        ask = "Nginx file"
+        type = "text"
+        source = "__FINALPATH__/nginx.conf"
 
     [source.function]
-    name = "Save with a bash function"
+    name = "Bash function"
         
         [source.function.arg8]
-        ask = "Custom validate and save arg8 password"
+        ask = "Custom validator and setter for arg8 password"
         type = "password"
+        source = ""
+        
+        [source.function.arg9]
+        ask = "Custom getter arg9"
+        type = "markdown"
+        source = ""
+        
+        [source.function.alert]
+        ask = "Custom getter alert"
+        type = "alert"
+        style = "info"
+        source = ""

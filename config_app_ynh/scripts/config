@@ -20,16 +20,42 @@ final_path=$(ynh_app_setting_get $app final_path)
 # SPECIFIC GETTERS FOR TOML SHORT KEY
 #=================================================
 
-get__arg8() {
-    echo ""
+get__arg9() {
+    cat << EOF
+ask:
+  en: |
+    ### Files in $final_path
+    
+    | Name | weight |
+    | ---- | ------ |
+EOF
+    for file in $final_path/* ; do
+        echo "    | $file | $(du -sh $file | cut -f1) |"
+    done
+}
+
+get__alert() {
+    if [ -f "/sys/class/net/tun0/operstate" ] && [ "$(cat /sys/class/net/tun0/operstate)" == "up" ]
+    then
+    cat << EOF
+style: success
+ask:
+  en: Your VPN is running :)
+EOF
+    else
+    cat << EOF
+style: danger
+ask:
+  en: Your VPN is down
+EOF
+    fi
 }
 
 #=================================================
 # SPECIFIC VALIDATORS FOR TOML SHORT KEYS
 #=================================================
 validate__arg8() {
-    [[ "${#arg8}" -lt 8 ]] &&
-        echo 'Too short password'
+    if [[ "${#arg8}" -lt 8 ]]; then echo 'Too short password'; fi
 }
 
 #=================================================
@@ -39,6 +65,7 @@ set__arg8() {
     if [ -z "${arg8}" ]
     then
         python -c "import crypt; print(crypt.crypt(\"${arg8}\", \"\$6\$saltsalt\$\"))" > $final_path/password
+        ynh_print_info "The hash of your password has been registered in $final_path/password"
     fi
 }
 
@@ -47,7 +74,7 @@ set__arg8() {
 #=================================================
 ynh_panel_apply() {
     _ynh_panel_apply
-    systemctl restart nginx
+    systemctl reload nginx
 }
 
 #=================================================
