@@ -72,12 +72,12 @@ set__arg8() {
 #=================================================
 # OVERWRITING APPLY STEP 
 #=================================================
-ynh_panel_apply() {
-    _ynh_panel_apply
+ynh_app_config_apply() {
+    _ynh_app_config_apply
     systemctl reload nginx
 }
 
 #=================================================
 # GENERIC FINALIZATION
 #=================================================
-ynh_panel_run $1
+ynh_app_config_run $1
