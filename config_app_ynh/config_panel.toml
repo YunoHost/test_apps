@@ -164,73 +164,73 @@ services = ["nginx"]
         ask = "Display if helpLink question is filled"
         type = "string"
 
-[source]
-name = "Source section"
+[bind]
+name = "Bind panel"
     
-    [source.settings]
+    [bind.settings]
     name = "App settings"
         
-        [source.settings.arg1]
+        [bind.settings.arg1]
         ask = "Save app settings arg1"
         type = "string"
 
-    [source.variable]
+    [bind.variable]
     name = "YAML"
         
-        [source.variable.arg2]
+        [bind.variable.arg2]
         ask = "Save arg2 in YAML"
         type = "string"
-        source = ":__FINALPATH__/test.yml"
+        bind = ":__FINALPATH__/test.yml"
         
-        [source.variable.arg3]
+        [bind.variable.arg3]
         ask = "Save arg3 in JSON"
         type = "string"
-        source = ":__FINALPATH__/test.json"
+        bind = ":__FINALPATH__/test.json"
         
-        [source.variable.arg4]
+        [bind.variable.arg4]
         ask = "Save arg4 in INI"
         type = "string"
-        source = ":__FINALPATH__/test.ini"
+        bind = ":__FINALPATH__/test.ini"
         
-        [source.variable.arg5]
+        [bind.variable.arg5]
         ask = "Save arg5 in PHP file"
         type = "string"
-        source = ":__FINALPATH__/test.php"
+        bind = ":__FINALPATH__/test.php"
         
-        [source.variable.arg6]
+        [bind.variable.arg6]
         ask = "Save arg6 in python file"
         type = "string"
-        source = ":__FINALPATH__/test.py"
+        bind = ":__FINALPATH__/test.py"
 
-    [source.file]
+    [bind.file]
     name = "File"
         
-        [source.file.arg7]
+        [bind.file.arg7]
         ask = "Save a cube file"
         type = "file"
         accept = ".cube"
-        source = "__FINALPATH__/test.cube"
+        bind = "__FINALPATH__/test.cube"
 
-        [source.file.arg7b]
+        [bind.file.arg7b]
         ask = "Nginx file"
         type = "text"
-        source = "__FINALPATH__/nginx.conf"
+        bind = "__FINALPATH__/nginx.conf"
 
-    [source.function]
+    [bind.function]
     name = "Bash function"
         
-        [source.function.arg8]
+        [bind.function.arg8]
         ask = "Custom validator and setter for arg8 password"
         type = "password"
-        source = ""
+        bind = "null"
         
-        [source.function.arg9]
+        [bind.function.arg9]
         ask = "Custom getter arg9"
         type = "markdown"
-        source = ""
+        bind = "null"
         
-        [source.function.alert]
+        [bind.function.alert]
         ask = "Custom getter alert"
         type = "alert"
         style = "info"
-        source = ""
+        bind = "null"
