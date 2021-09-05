@@ -146,25 +146,19 @@ services = ["nginx"]
         
         [main.generic.help]
         ask = "Here we add some help"
-        type = "string"
-        help = "You can feel this question with your keyboard (yes i know it's very useful)"
-        
-        [main.generic.helplink]
-        ask = "Here we add an help link"
         type = "select"
+        help = "You can not feel this question with your keyboard (yes i know it's very useful)"
         choices.question = "Display next question"
         choices.section = "Display next section"
-        helpLink.href = "https://yunohost.org/doc"
-        helpLink.text = "Yunohost Doc"
-
-        [main.generic.visibleif]
-        ask = "Display if helpLink question is filled"
+        
+        [main.generic.visible]
+        ask = "Display if help question is filled"
         type = "string"
-        visibleIf = "helplink == 'question'"
+        visible = "help == 'question'"
     
     [main.ifsection]
     name = "Section displayed only if helplink is filled"
-    visibleIf = "helplink == 'section'"
+    visible = "help == 'section'"
         
         [main.ifsection.sub]
         ask = "Display if helpLink question is filled"
