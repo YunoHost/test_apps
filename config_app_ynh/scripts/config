@@ -55,7 +55,7 @@ EOF
 # SPECIFIC VALIDATORS FOR TOML SHORT KEYS
 #=================================================
 validate__arg8() {
-    if [[ "${#arg8}" -lt 8 ]]; then echo 'Too short password'; fi
+    if [[ "${#arg8}" -lt 12 ]]; then echo 'Too short password'; fi
 }
 
 #=================================================
