@@ -63,7 +63,7 @@ services = ["nginx"]
         [main.components.select]
         ask = "I can haz choices?"
         type = "select"
-        choices.option_one = "W00t \o\"
+        choices.option_one = "W00t \\o\\"
         choices.option_two = "Awesom! =D"
         choices.option_three = "Uhoh? ô.o"
 
@@ -164,7 +164,7 @@ services = ["nginx"]
 
     [main.ifsection]
     name = "This section is only displayed if the previous question is set to 'Display next section'"
-    visible = "trigglervisible == 'nextsection'"
+    visible = "triggervisible == 'nextsection'"
 
         [main.ifsection.sub]
         ask = "I can haz cheezburgers?"
