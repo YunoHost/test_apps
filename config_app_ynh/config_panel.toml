@@ -3,79 +3,80 @@ version = "1.0"
 [main]
 name = "Main panel"
 services = ["nginx"]
+
     [main.components]
-    name = ""
+    name = "Classic fields"
         
         [main.components.boolean]
-        ask = "Put a boolean"
+        ask = "I can haz boolean?"
         type = "boolean"
         
         [main.components.number]
-        ask = "Put a number"
+        ask = "I can haz number?"
         type = "number"
         min = 1
         max = 100
 
         [main.components.range]
-        ask = "Put a range"
+        ask = "I can haz range?"
         type = "range"
         min = 0
         max = 100
         step = 10
         
         [main.components.str]
-        ask = "Put a string"
+        ask = "I can haz string?"
         type = "string"
         
         [main.components.text]
-        ask = "Put a text"
+        ask = "I can haz text?"
         type = "text"
         
         [main.components.password]
-        ask = "Put a password"
+        ask = "I can haz paszwurd?"
         type = "password"
 
         [main.components.path]
-        ask = "Put a path"
+        ask = "I can haz path?"
         type = "path"
         
         [main.components.email]
-        ask = "Put a email"
+        ask = "I can haz email?"
         type = "email"
         
         [main.components.url]
-        ask = "Put a url"
+        ask = "I can haz url?"
         type = "url"
         
         [main.components.date]
-        ask = "Put a date"
+        ask = "I can haz date?"
         type = "date"
         
         [main.components.time]
-        ask = "Put a time"
+        ask = "I can haz time?"
         type = "time"
         
         [main.components.color]
-        ask = "Put a color"
+        ask = "I can haz color?"
         type = "color"
         
         [main.components.select]
-        ask = "Choose an option"
+        ask = "I can chose option?"
         type = "select"
         choices.option1 = "Plop1"
         choices.option2 = "Plop2"
         choices.option3 = "Plop3"
         
         [main.components.domain]
-        ask = "Put a domain"
+        ask = "I can haz domain?"
         type = "domain"
         
         [main.components.user]
-        ask = "Put a user"
+        ask = "I can haz user?"
         type = "user"
         
         [main.components.tags]
-        ask = "Put some emails"
+        ask = "I can haz several emailz?"
         type = "tags"
         placeholder = "Enter some emails separated by commas"
         limit = 3
@@ -83,46 +84,46 @@ services = ["nginx"]
         pattern.error = 'An email is required for this field'
         
         [main.components.tags2]
-        ask = "Put some tags from a list"
+        ask = "I can chose several tagz?"
         type = "tags"
         choices = ['table', 'chair', 'bed', 'desk']
         placeholder = "Add some tags"
         icon = "bed"
         
         [main.components.file]
-        ask = "Put a file"
+        ask = "I can haz file?"
         type = "file"
 
     [main.messages]
-    name = "Read only components"
+    name = "Messages / Read-only components"
         
         [main.messages.success]
-        ask = "This is a success message"
+        ask = "I can haz success"
         type = "alert"
         style = "success"
         icon = "beer"
         
         [main.messages.info]
-        ask = "This is an info message"
+        ask = "I can haz info"
         type = "alert"
         style = "info"
         
         [main.messages.warning]
-        ask = "This is an warning message"
+        ask = "Onoez i haz a warnin'"
         type = "alert"
         style = "warning"
         
         [main.messages.danger]
-        ask = "This is a danger message"
+        ask = "Onoez i haz a Danger!!"
         type = "alert"
         style = "danger"
         
         [main.messages.display_text]
-        ask = "This is a simple text"
+        ask = "I haz a simple text"
         type = "display_text"
         
         [main.messages.markdown]
-        ask = "This is a **markdown** text"
+        ask = "I haz some **awesome** *markdown* text!!"
         type = "markdown"
     
     [main.generic]
@@ -147,77 +148,77 @@ services = ["nginx"]
         [main.generic.help]
         ask = "Here we add some help"
         type = "select"
-        help = "You can not feel this question with your keyboard (yes i know it's very useful)"
+        help = "You can not fill this question with your keyboard (yes i know it's very useful)"
         choices.question = "Display next question"
         choices.section = "Display next section"
         
         [main.generic.visible]
-        ask = "Display if help question is filled"
+        ask = "This question is only displayed if previous question is set to 'Display next question'"
         type = "string"
         visible = "help == 'question'"
     
     [main.ifsection]
-    name = "Section displayed only if helplink is filled"
+    name = "This section is only displayed if the previous question is set to 'Display next section'"
     visible = "help == 'section'"
         
         [main.ifsection.sub]
-        ask = "Display if helpLink question is filled"
+        ask = "I can haz cheezburgers?"
         type = "string"
 
 [bind]
 name = "Bind panel"
     
     [bind.settings]
-    name = "App settings"
+    name = "Bind to settings"
         
         [bind.settings.arg1]
         ask = "Save app settings arg1"
         type = "string"
 
     [bind.variable]
-    name = "YAML"
+    name = "Bind to key/value in files"
         
         [bind.variable.arg2]
-        ask = "Save arg2 in YAML"
+        ask = "I can haz value for arg2 in test.yml ?"
         type = "string"
         bind = ":__FINALPATH__/test.yml"
         
         [bind.variable.arg3]
-        ask = "Save arg3 in JSON"
+        ask = "I can haz value for arg3 in test.json ?"
         type = "string"
         bind = ":__FINALPATH__/test.json"
         
         [bind.variable.arg4]
-        ask = "Save arg4 in INI"
+        ask = "I can haz value for arg4 in test.ini ?"
         type = "string"
         bind = ":__FINALPATH__/test.ini"
         
         [bind.variable.arg5]
-        ask = "Save arg5 in PHP file"
+        ask = "I can haz value for arg5 in test.php ?"
         type = "string"
         bind = ":__FINALPATH__/test.php"
         
         [bind.variable.arg6]
-        ask = "Save arg6 in python file"
+        ask = "I can haz value for arg6 in test.py ?"
         type = "string"
         bind = ":__FINALPATH__/test.py"
 
     [bind.file]
-    name = "File"
+    name = "Bind to an entire file"
         
         [bind.file.arg7]
-        ask = "Save a cube file"
+        ask = "I can haz a .cube ?"
         type = "file"
         accept = ".cube"
         bind = "__FINALPATH__/test.cube"
 
         [bind.file.arg7b]
-        ask = "Nginx file"
+        ask = "Emeged i can edit sum file!#1!"
         type = "text"
         bind = "__FINALPATH__/nginx.conf"
 
     [bind.function]
-    name = "Bash function"
+    name = "Custom bash getters / validators / setters"
         
         [bind.function.arg8]
         ask = "Custom validator and setter for arg8 password"
