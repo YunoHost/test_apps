@@ -145,7 +145,7 @@ services = ["nginx"]
         type = "string"
         optional = false
 
-        [main.generic.help]
+        [main.generic.helptext]
         ask = "I can haz some help tips"
         type = "string"
         help = "Im in ur help text helpin' yar userz"
@@ -157,7 +157,7 @@ services = ["nginx"]
         choices.nextquestion = "Display next question"
         choices.nextsection = "Display next section"
 
-        [main.generic.visible]
+        [main.generic.visible_question]
         ask = "This question is only displayed if previous question is set to 'Display next question'"
         type = "string"
         visible = "triggervisible == 'nextquestion'"
