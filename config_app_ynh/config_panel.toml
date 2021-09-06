@@ -144,21 +144,21 @@ services = ["nginx"]
         type = "string"
         optional = false
         
-        [main.generic.help]
+        [main.generic.help_visible]
         ask = "Here we add some help"
         type = "select"
         help = "You can not feel this question with your keyboard (yes i know it's very useful)"
         choices.question = "Display next question"
         choices.section = "Display next section"
         
-        [main.generic.visible]
+        [main.generic.visible_field]
         ask = "Display if help question is filled"
         type = "string"
-        visible = "help == 'question'"
+        visible = "help_visible == 'question'"
     
     [main.ifsection]
     name = "Section displayed only if helplink is filled"
-    visible = "help == 'section'"
+    visible = "help_visible == 'section'"
         
         [main.ifsection.sub]
         ask = "Display if helpLink question is filled"
