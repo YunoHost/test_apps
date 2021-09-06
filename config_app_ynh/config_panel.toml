@@ -6,11 +6,11 @@ services = ["nginx"]
 
     [main.components]
     name = "Classic fields"
-        
+
         [main.components.boolean]
         ask = "I can haz boolean?"
         type = "boolean"
-        
+
         [main.components.number]
         ask = "I can haz number?"
         type = "number"
@@ -23,15 +23,15 @@ services = ["nginx"]
         min = 0
         max = 100
         step = 10
-        
+
         [main.components.str]
         ask = "I can haz string?"
         type = "string"
-        
+
         [main.components.text]
         ask = "I can haz text?"
         type = "text"
-        
+
         [main.components.password]
         ask = "I can haz paszwurd?"
         type = "password"
@@ -39,42 +39,42 @@ services = ["nginx"]
         [main.components.path]
         ask = "I can haz path?"
         type = "path"
-        
+
         [main.components.email]
         ask = "I can haz email?"
         type = "email"
-        
+
         [main.components.url]
         ask = "I can haz url?"
         type = "url"
-        
+
         [main.components.date]
         ask = "I can haz date?"
         type = "date"
-        
+
         [main.components.time]
         ask = "I can haz time?"
         type = "time"
-        
+
         [main.components.color]
         ask = "I can haz color?"
         type = "color"
-        
+
         [main.components.select]
-        ask = "I can chose option?"
+        ask = "I can haz choices?"
         type = "select"
-        choices.option1 = "Plop1"
-        choices.option2 = "Plop2"
-        choices.option3 = "Plop3"
-        
+        choices.option_one = "W00t \o\"
+        choices.option_two = "Awesom! =D"
+        choices.option_three = "Uhoh? ô.o"
+
         [main.components.domain]
         ask = "I can haz domain?"
         type = "domain"
-        
+
         [main.components.user]
         ask = "I can haz user?"
         type = "user"
-        
+
         [main.components.tags]
         ask = "I can haz several emailz?"
         type = "tags"
@@ -82,122 +82,127 @@ services = ["nginx"]
         limit = 3
         pattern.regexp = '^.+@.+$'
         pattern.error = 'An email is required for this field'
-        
+
         [main.components.tags2]
         ask = "I can chose several tagz?"
         type = "tags"
         choices = ['table', 'chair', 'bed', 'desk']
         placeholder = "Add some tags"
         icon = "bed"
-        
+
         [main.components.file]
         ask = "I can haz file?"
         type = "file"
 
     [main.messages]
     name = "Messages / Read-only components"
-        
+
         [main.messages.success]
-        ask = "I can haz success"
+        ask = "I can haz success!"
         type = "alert"
         style = "success"
         icon = "beer"
-        
+
         [main.messages.info]
         ask = "I can haz info"
         type = "alert"
         style = "info"
-        
+
         [main.messages.warning]
         ask = "Onoez i haz a warnin'"
         type = "alert"
         style = "warning"
-        
+
         [main.messages.danger]
         ask = "Onoez i haz a Danger!!"
         type = "alert"
         style = "danger"
-        
+
         [main.messages.display_text]
         ask = "I haz a simple text"
         type = "display_text"
-        
+
         [main.messages.markdown]
         ask = "I haz some **awesome** *markdown* text!!"
         type = "markdown"
-    
+
     [main.generic]
-    name = "Generic options"
-        
+    name = "Specific question options demo"
+
         [main.generic.pattern]
-        ask = "This is a question with a pattern validation"
+        ask = "I can haz pattern validation!"
         type = "string"
         pattern.regexp = '^[A-F]\d\d$'
         pattern.error = "Provide a room like F12 : one uppercase and 2 numbers"
-        
+
         [main.generic.example]
-        ask = "This is a question with an example value"
+        ask = "I can haz example value"
         type = "string"
         example = "Camille"
-        
+
         [main.generic.required]
-        ask = "This is a required value"
+        ask = "I can haz required field"
         type = "string"
         optional = false
-        
+
         [main.generic.help]
-        ask = "Here we add some help"
+        ask = "I can haz some help tips"
+        type = "string"
+        help = "Im in ur help text helpin' yar userz"
+
+        [main.generic.triggervisible]
+        ask = "I can trigger visibility for other questionz or sectionz!!"
         type = "select"
-        help = "You can not fill this question with your keyboard (yes i know it's very useful)"
-        choices.question = "Display next question"
-        choices.section = "Display next section"
-        
+        choices.nothing = "Not triggering any invisible question/section"
+        choices.nextquestion = "Display next question"
+        choices.nextsection = "Display next section"
+
         [main.generic.visible]
         ask = "This question is only displayed if previous question is set to 'Display next question'"
         type = "string"
-        visible = "help == 'question'"
-    
+        visible = "triggervisible == 'nextquestion'"
+
     [main.ifsection]
     name = "This section is only displayed if the previous question is set to 'Display next section'"
-    visible = "help == 'section'"
-        
+    visible = "trigglervisible == 'nextsection'"
+
         [main.ifsection.sub]
         ask = "I can haz cheezburgers?"
         type = "string"
 
 [bind]
 name = "Bind panel"
-    
+
     [bind.settings]
     name = "Bind to settings"
-        
+
         [bind.settings.arg1]
         ask = "Save app settings arg1"
         type = "string"
 
     [bind.variable]
     name = "Bind to key/value in files"
-        
+
         [bind.variable.arg2]
         ask = "I can haz value for arg2 in test.yml ?"
         type = "string"
         bind = ":__FINALPATH__/test.yml"
-        
+
         [bind.variable.arg3]
         ask = "I can haz value for arg3 in test.json ?"
         type = "string"
         bind = ":__FINALPATH__/test.json"
-        
+
         [bind.variable.arg4]
         ask = "I can haz value for arg4 in test.ini ?"
         type = "string"
         bind = ":__FINALPATH__/test.ini"
-        
+
         [bind.variable.arg5]
         ask = "I can haz value for arg5 in test.php ?"
         type = "string"
         bind = ":__FINALPATH__/test.php"
-        
+
         [bind.variable.arg6]
         ask = "I can haz value for arg6 in test.py ?"
         type = "string"
@@ -205,7 +210,7 @@ name = "Bind panel"
 
     [bind.file]
     name = "Bind to an entire file"
-        
+
         [bind.file.arg7]
         ask = "I can haz a .cube ?"
         type = "file"
@@ -218,20 +223,23 @@ name = "Bind panel"
         bind = "__FINALPATH__/nginx.conf"
 
     [bind.function]
-    name = "Custom bash getters / validators / setters"
-        
+    name = "Bind to custom bash getters / validators / setters"
+
         [bind.function.arg8]
-        ask = "Custom validator and setter for arg8 password"
+        ask = "I can haz a password ?"
+        help = "N.B. : This is mapped to a custom validate__/set__arg8 function in the config script"
         type = "password"
         bind = "null"
-        
+
         [bind.function.arg9]
         ask = "Custom getter arg9"
+        help = "N.B.: This is mapped to a custom get__arg9 function in the config script"
         type = "markdown"
         bind = "null"
-        
+
         [bind.function.alert]
         ask = "Custom getter alert"
+        help = "N.B.: This is mapped to a custom get__alert function in the config script"
         type = "alert"
         style = "info"
         bind = "null"
