@@ -55,14 +55,14 @@ EOF
 # SPECIFIC VALIDATORS FOR TOML SHORT KEYS
 #=================================================
 validate__arg8() {
-    if [[ "${#arg8}" -lt 8 ]]; then echo 'Too short password'; fi
+    if [[ "${#arg8}" -lt 12 ]]; then echo 'Too short password'; fi
 }
 
 #=================================================
 # SPECIFIC SETTERS FOR TOML SHORT KEYS
 #=================================================
 set__arg8() {
-    if [ -z "${arg8}" ]
+    if [ -n "${arg8}" ]
     then
         python -c "import crypt; print(crypt.crypt(\"${arg8}\", \"\$6\$saltsalt\$\"))" > $final_path/password
         ynh_print_info "The hash of your password has been registered in $final_path/password"
