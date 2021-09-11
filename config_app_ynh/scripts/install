@@ -9,3 +9,29 @@ ynh_app_setting_set --app=$app --key=final_path --value=$final_path
 mkdir -p $final_path
 
 cp ../conf/* /var/www/$app/
+# Initialize default values
+ynh_app_setting_set --app=$app --key=boolean --value=0
+ynh_app_setting_set --app=$app --key=number --value=20
+ynh_app_setting_set --app=$app --key=str --value=""
+ynh_app_setting_set --app=$app --key=text --value=""
+ynh_app_setting_set --app=$app --key=password --value=""
+ynh_app_setting_set --app=$app --key=path --value=""
+ynh_app_setting_set --app=$app --key=email --value=""
+ynh_app_setting_set --app=$app --key=url --value=""
+ynh_app_setting_set --app=$app --key=date --value=""
+ynh_app_setting_set --app=$app --key=time --value=""
+ynh_app_setting_set --app=$app --key=color --value=""
+ynh_app_setting_set --app=$app --key=select --value="option_one"
+ynh_app_setting_set --app=$app --key=domain --value=""
+ynh_app_setting_set --app=$app --key=user --value=""
+ynh_app_setting_set --app=$app --key=tags --value=""
+ynh_app_setting_set --app=$app --key=tags2 --value=""
+ynh_app_setting_set --app=$app --key=pattern --value=""
+ynh_app_setting_set --app=$app --key=example --value=""
+ynh_app_setting_set --app=$app --key=required --value=""
+ynh_app_setting_set --app=$app --key=helptext --value=""
+ynh_app_setting_set --app=$app --key=triggervisible --value="nothing"
+ynh_app_setting_set --app=$app --key=visible_question --value=""
+ynh_app_setting_set --app=$app --key=sub --value=""
+ynh_app_setting_set --app=$app --key=arg1 --value=""
+
