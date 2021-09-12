@@ -12,6 +12,7 @@ cp ../conf/* /var/www/$app/
 # Initialize default values
 ynh_app_setting_set --app=$app --key=boolean --value=0
 ynh_app_setting_set --app=$app --key=number --value=20
+ynh_app_setting_set --app=$app --key=range --value=50
 ynh_app_setting_set --app=$app --key=str --value=""
 ynh_app_setting_set --app=$app --key=text --value=""
 ynh_app_setting_set --app=$app --key=password --value=""
