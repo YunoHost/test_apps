@@ -93,6 +93,7 @@ services = ["nginx"]
         [main.components.file]
         ask = "I can haz file?"
         type = "file"
+        help = "(NB: this won't actually be uploaded anywhere unless 'bind' is defined in the question)"
 
     [main.messages]
     name = "Messages / Read-only components"
