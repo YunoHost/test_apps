@@ -63,9 +63,9 @@ services = ["nginx"]
         [main.components.select]
         ask = "I can haz choices?"
         type = "select"
-        choices.option_one = "W00t \\o\\"
-        choices.option_two = "Awesom! =D"
-        choices.option_three = "Uhoh? ô.o"
+        choices.woot = "W00t \\o\\ You can haz choicez"
+        choices.awesome = "Awesom! =D  You can put a super long description"
+        choices.ohnoes = "Uhoh? ô.o"
 
         [main.components.domain]
         ask = "I can haz domain?"
