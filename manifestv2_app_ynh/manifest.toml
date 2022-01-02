@@ -1,0 +1,95 @@
+packaging_format = 2
+
+id = "hextris"
+name = "Hextris"
+description.en = "A fast paced puzzle game"
+description.fr = "Un jeu de puzzle très rapide"
+
+version = "2020-05-05~ynh4"
+
+maintainers = ["foobar"]
+
+[upstream]
+license = "GPL-3.0"
+website = "http://hextris.github.io/"
+demo = "https://hextris.io/"
+code = "https://github.com/Hextris/Hextris"
+
+[integration]
+yunohost = ">= 4.2.4"
+architectures = "all" # Can be replaced by a list of supported archs 
+                      # using the dpkg --print-architecture nomenclature, for example: ["amd64", "i386"]
+multi_instance = true
+ldap = "?"
+sso = "?"
+
+disk = "50M"
+ram.build = "1G"      # This is an *estimate* minimum value for the disk/ram needed at build time (e.g. during install/upgrade) and during regular usage
+ram.runtime = "10M"   # Please only use round values such as: 10M, 100M, 200M, 400M, 800M, 1G, 2G, 4G, 8G
+ram.include_swap = false
+
+[install]
+
+    [install.domain]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    type = "domain"
+    full_domain = false
+
+    [install.path]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    type = "path"
+    default = "/hextris"
+
+    [install.init_main_permission]
+    # this is (to become) a generic question - ask strings are automatically handled by Yunohost's core
+    ask.en = "Who should have access to this application ? (This can later be changed in the webadmin)"
+    type = "group"
+    default = "visitors"
+
+[resources]
+
+    [resources.system_user]
+    
+    [resources.install_dir]
+    alias = "final_path"
+ 
+    [resources.data_dir]
+    alias = "datadir"
+
+    [resources.permissions]
+    main.url = "/"
+    
+    admin.url = "/admin"
+    admin.show_tile = false
+    
+    api.url = "/api"
+    api.allowed = "visitors"
+    api.protected = true
+
+    [resources.apt]
+    packages = "nyancat, sl"
+
+    #    [[resources.apt.extra]]
+    #    repo = "deb https://dl.yarnpkg.com/debian/ stable main"
+    #    key = "https://dl.yarnpkg.com/debian/pubkey.gpg"
+    #    packages = "yarn"
+
+
+    # (Below, to be handled in packaging v3...)
+
+    #[resources.sources]
+    #main.url = "https://github.com/Hextris/hextris/archive/8872ec47d694628e2fe668ebaa90b13d5626d95f.tar.gz"
+    #main.sha256sum = "67f3fbd54c405717a25fb1e6f71d2b46e94c7ac6971861dd99ae5e58f6609892"
+    #main.predownload = true
+    
+    #[resources.conf_nginx]
+
+    #[resources.conf_logrotate]
+
+    #[resources.conf_fail2ban]
+
+    #[resources.conf_phpfpm]
+
+    #[resources.conf_systemd]
+    #integrate_in_yunohost = true
+    # FIXME : watdo if many services
