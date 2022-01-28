@@ -1,5 +1,12 @@
 #!/bin/bash
 
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+#Keep this path for calling _common.sh inside the execution's context of backup and restore scripts
 source ../settings/scripts/_common.sh
 source /usr/share/yunohost/helpers
 
@@ -8,7 +15,8 @@ source /usr/share/yunohost/helpers
 #=================================================
 ynh_print_info --message="Declaring files to be backed up..."
 
-ynh_backup --src_path="$final_path"
+ynh_backup --src_path="$install_dir"
+
 ynh_backup --src_path="/etc/nginx/conf.d/$domain.d/$app.conf"
 
 #=================================================

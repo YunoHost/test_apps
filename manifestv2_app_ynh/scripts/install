@@ -1,13 +1,22 @@
 #!/bin/bash
 
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source _common.sh
 source /usr/share/yunohost/helpers
 
+#=================================================
+# STANDARD MODIFICATIONS
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression --message="Setting up source files..." --weight=1
 
+# Download, check integrity, uncompress and patch the source from app.src
 ynh_setup_source --dest_dir="$install_dir"
 
 chmod 750 "$install_dir"
@@ -18,8 +27,6 @@ chown -R $app:www-data "$install_dir"
 # NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Configuring NGINX web server..." --weight=2
-
-#oekdowkodewodk
 
 # Create a dedicated NGINX config
 ynh_add_nginx_config

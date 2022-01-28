@@ -10,8 +10,6 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
-# STANDARD REMOVE
-#=================================================
 # REMOVE NGINX CONFIGURATION
 #=================================================
 ynh_script_progression --message="Removing NGINX web server configuration..." --weight=2
