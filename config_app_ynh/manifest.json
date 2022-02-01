@@ -1,4 +1,5 @@
 {
+    "packaging_format": 1,
     "name": "Config panel",
     "id": "config_app",
     "description": {

@@ -1,4 +1,5 @@
 {
+    "packaging_format": 1,
     "name": "Backup (recommended-way) Test App",
     "id": "backup_recommended_app",
     "description": {

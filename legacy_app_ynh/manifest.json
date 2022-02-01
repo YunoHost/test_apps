@@ -1,4 +1,5 @@
 {
+    "packaging_format": 1,
     "name": "Legacy application",
     "id": "legacy_app",
     "description": {

@@ -1,4 +1,5 @@
 {
+    "packaging_format": 1,
     "name": "Permissions Test",
     "id": "permissions_app",
     "description": {
