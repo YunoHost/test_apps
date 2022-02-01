@@ -1,6 +1,6 @@
 packaging_format = 2
 
-id = "manifestv2app"
+id = "manifestv2_app"
 name = "Manifest v2 app"
 description.en = "Demonstrate the manifest/packaging v2 format (adapted from Hextris)"
 
