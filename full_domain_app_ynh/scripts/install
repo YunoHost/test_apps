@@ -20,7 +20,8 @@ mkdir /var/www/$app
 cp ../conf/index.html /var/www/$app
 
 # Set the app as public
-yunohost app setting $app unprotected_uris -v "/"
+ynh_permission_update --permission="main" --add="visitors"
+#yunohost app setting $app unprotected_uris -v "/"
 
 # Reload Nginx and regenerate SSOwat conf
 systemctl reload nginx
