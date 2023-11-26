@@ -71,15 +71,22 @@ services = ["nginx"]
         ask = "I can haz domain?"
         type = "domain"
 
+        [main.components.app_]
+        ask = "I can haz app?"
+        type = "app"
+
         [main.components.user]
         ask = "I can haz user?"
         type = "user"
+
+        [main.components.group]
+        ask = "I can haz group?"
+        type = "group"
 
         [main.components.tags]
         ask = "I can haz several emailz?"
         type = "tags"
         placeholder = "Enter some emails separated by commas"
-        limit = 3
         pattern.regexp = '^.+@.+$'
         pattern.error = 'An email is required for this field'
 
@@ -213,10 +220,10 @@ name = "Bind panel"
     name = "Bind to an entire file"
 
         [bind.file.arg7]
-        ask = "I can haz a .cube ?"
+        ask = "I can haz a .json ?"
         type = "file"
-        accept = ".cube"
-        bind = "__FINALPATH__/test.cube"
+        accept = ["application/json"]
+        bind = "__FINALPATH__/test.json"
 
         [bind.file.arg7b]
         ask = "Emeged i can edit sum file!#1!"
@@ -233,14 +240,12 @@ name = "Bind panel"
         bind = "null"
 
         [bind.function.arg9]
-        ask = "Custom getter arg9"
-        help = "N.B.: This is mapped to a custom get__arg9 function in the config script"
+        ask = "Custom getter arg9  N.B.: This is mapped to a custom get__arg9 function in the config script"
         type = "markdown"
         bind = "null"
 
         [bind.function.alert]
-        ask = "Custom getter alert"
-        help = "N.B.: This is mapped to a custom get__alert function in the config script"
+        ask = "Custom getter alert N.B.: This is mapped to a custom get__alert function in the config script"
         type = "alert"
         style = "info"
         bind = "null"
