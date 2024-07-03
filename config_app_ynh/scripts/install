@@ -1,40 +1,32 @@
 set -eux
-
-# Source app helpers
 source /usr/share/yunohost/helpers
 
-app=$YNH_APP_INSTANCE_NAME
-final_path=/var/www/$app
-ynh_app_setting_set --app=$app --key=final_path --value=$final_path
-mkdir -p $final_path
-
 cp ../conf/* /var/www/$app/
-# Initialize default values
-ynh_app_setting_set --app=$app --key=boolean --value=0
-ynh_app_setting_set --app=$app --key=number --value=20
-ynh_app_setting_set --app=$app --key=range --value=50
-ynh_app_setting_set --app=$app --key=str --value=""
-ynh_app_setting_set --app=$app --key=text --value=""
-ynh_app_setting_set --app=$app --key=password --value=""
-ynh_app_setting_set --app=$app --key=path --value=""
-ynh_app_setting_set --app=$app --key=email --value=""
-ynh_app_setting_set --app=$app --key=url --value=""
-ynh_app_setting_set --app=$app --key=date --value=""
-ynh_app_setting_set --app=$app --key=time --value=""
-ynh_app_setting_set --app=$app --key=color --value=""
-ynh_app_setting_set --app=$app --key=select --value="option_one"
-ynh_app_setting_set --app=$app --key=domain --value=""
-ynh_app_setting_set --app=$app --key=app_ --value=""
-ynh_app_setting_set --app=$app --key=user --value=""
-ynh_app_setting_set --app=$app --key=group --value=""
-ynh_app_setting_set --app=$app --key=tags --value=""
-ynh_app_setting_set --app=$app --key=tags2 --value=""
-ynh_app_setting_set --app=$app --key=pattern --value=""
-ynh_app_setting_set --app=$app --key=example --value=""
-ynh_app_setting_set --app=$app --key=required --value=""
-ynh_app_setting_set --app=$app --key=helptext --value=""
-ynh_app_setting_set --app=$app --key=triggervisible --value="nothing"
-ynh_app_setting_set --app=$app --key=visible_question --value=""
-ynh_app_setting_set --app=$app --key=sub --value=""
-ynh_app_setting_set --app=$app --key=arg1 --value=""
 
+ynh_app_setting_set --key=boolean --value=0
+ynh_app_setting_set --key=number --value=20
+ynh_app_setting_set --key=range --value=50
+ynh_app_setting_set --key=str --value=""
+ynh_app_setting_set --key=text --value=""
+ynh_app_setting_set --key=password --value=""
+ynh_app_setting_set --key=path --value=""
+ynh_app_setting_set --key=email --value=""
+ynh_app_setting_set --key=url --value=""
+ynh_app_setting_set --key=date --value=""
+ynh_app_setting_set --key=time --value=""
+ynh_app_setting_set --key=color --value=""
+ynh_app_setting_set --key=select --value="option_one"
+ynh_app_setting_set --key=domain --value=""
+ynh_app_setting_set --key=app_ --value=""
+ynh_app_setting_set --key=user --value=""
+ynh_app_setting_set --key=group --value=""
+ynh_app_setting_set --key=tags --value=""
+ynh_app_setting_set --key=tags2 --value=""
+ynh_app_setting_set --key=pattern --value=""
+ynh_app_setting_set --key=example --value=""
+ynh_app_setting_set --key=required --value=""
+ynh_app_setting_set --key=helptext --value=""
+ynh_app_setting_set --key=triggervisible --value="nothing"
+ynh_app_setting_set --key=visible_question --value=""
+ynh_app_setting_set --key=sub --value=""
+ynh_app_setting_set --key=arg1 --value=""
