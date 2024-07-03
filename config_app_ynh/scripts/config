@@ -10,12 +10,12 @@ get__arg9() {
     cat << EOF
 ask:
   en: |
-    ### Files in $final_path
+    ### Files in $install_dir
     
     | Name | weight |
     | ---- | ------ |
 EOF
-    for file in $final_path/* ; do
+    for file in $install_dir/* ; do
         echo "    | $file | $(du -sh $file | cut -f1) |"
     done
 }
@@ -50,8 +50,8 @@ validate__arg8() {
 set__arg8() {
     if [ -n "${arg8}" ]
     then
-        python -c "import crypt; print(crypt.crypt(\"${arg8}\", \"\$6\$saltsalt\$\"))" > $final_path/password
-        ynh_print_info "The hash of your password has been registered in $final_path/password"
+        python -c "import crypt; print(crypt.crypt(\"${arg8}\", \"\$6\$saltsalt\$\"))" > $install_dir/password
+        ynh_print_info "The hash of your password has been registered in $install_dir/password"
     fi
 }
 
