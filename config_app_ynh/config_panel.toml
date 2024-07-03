@@ -194,27 +194,27 @@ name = "Bind panel"
         [bind.variable.arg2]
         ask = "I can haz value for arg2 in test.yml ?"
         type = "string"
-        bind = ":__FINALPATH__/test.yml"
+        bind = ":__INSTALL_DIR__/test.yml"
 
         [bind.variable.arg3]
         ask = "I can haz value for arg3 in test.json ?"
         type = "string"
-        bind = ":__FINALPATH__/test.json"
+        bind = ":__INSTALL_DIR__/test.json"
 
         [bind.variable.arg4]
         ask = "I can haz value for arg4 in test.ini ?"
         type = "string"
-        bind = ":__FINALPATH__/test.ini"
+        bind = ":__INSTALL_DIR__/test.ini"
 
         [bind.variable.arg5]
         ask = "I can haz value for arg5 in test.php ?"
         type = "string"
-        bind = ":__FINALPATH__/test.php"
+        bind = ":__INSTALL_DIR__/test.php"
 
         [bind.variable.arg6]
         ask = "I can haz value for arg6 in test.py ?"
         type = "string"
-        bind = ":__FINALPATH__/test.py"
+        bind = ":__INSTALL_DIR__/test.py"
 
     [bind.file]
     name = "Bind to an entire file"
@@ -223,12 +223,12 @@ name = "Bind panel"
         ask = "I can haz a .json ?"
         type = "file"
         accept = ["application/json"]
-        bind = "__FINALPATH__/test.json"
+        bind = "__INSTALL_DIR__/test.json"
 
         [bind.file.arg7b]
         ask = "Emeged i can edit sum file!#1!"
         type = "text"
-        bind = "__FINALPATH__/nginx.conf"
+        bind = "__INSTALL_DIR__/nginx.conf"
 
     [bind.function]
     name = "Bind to custom bash getters / validators / setters"
