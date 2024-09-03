@@ -1,0 +1,11 @@
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+
+# Source YunoHost helpers
+source /usr/share/yunohost/helpers
+
+# Stop script if errors
+ynh_abort_if_errors
