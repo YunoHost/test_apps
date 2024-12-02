@@ -25,7 +25,7 @@ ynh_app_setting_set --app $app --key domain_2 --value $domain_2
 ynh_webpath_available $domain $path_url || ynh_die "$domain$path_url is not available, please use an other domain or path."
 ynh_webpath_register $app $domain $path_url
 
-ynh_permission_create --permission "admin" --url "/admin" --allowed "$admin_user" --label "Testing app admin" --protected true --show_tile true --auth_header true
+ynh_permission_create --permission "admin" --url "/admin" --allowed "$admin_user" --protected true --show_tile true --auth_header true
 if [[ "$domain" == "$domain_2" ]]
 then
     url_for_domain_2=""

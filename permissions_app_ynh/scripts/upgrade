@@ -21,7 +21,7 @@ domain_2=$(ynh_app_setting_get --app $app --key domain_2)
 #=================================================
 
 ynh_permission_update --permission admin --remove $admin_user --show_tile false --protected false
-ynh_permission_update --permission dev --add $admin_user --label "New tile" --protected true --show_tile true
+ynh_permission_update --permission dev --add $admin_user --protected true --show_tile true
 
 ynh_permission_url --permission admin --clear_urls --auth_header false
 
