@@ -8,7 +8,7 @@ User=__APP__
 Group=__APP__
 
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=python3 __INSTALL_DIR__/server.py __PORT__
+ExecStart=python3 -u __INSTALL_DIR__/server.py __PORT__
 StandardOutput=append:/var/log/__APP__/__APP__.log
 StandardError=inherit
 Restart=on-failure
