@@ -21,4 +21,6 @@ fi
 ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 
 # Create a dedicated NGINX config
-ynh_add_nginx_config || true # What could go wrong lol
+ynh_add_nginx_config || true
+
+systemctl restart nginx || true # What could go wrong lol
