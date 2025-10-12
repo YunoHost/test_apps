@@ -29,12 +29,6 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
 
-    [install.init_main_permission]
-    help.en = "If enabled, Hextris will be accessible by people who doesn't have an account. This can be changed later via the webadmin."
-    help.fr = "Si cette case est cochée, Hextris sera accessible aux personnes n'ayant pas de compte. Vous pourrez changer ceci plus tard via la webadmin."
-    type = "group"
-    default = "visitors"
-
 [resources]
     [resources.install_dir]
 
