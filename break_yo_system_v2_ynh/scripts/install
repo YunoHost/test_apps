@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
+source /usr/share/yunohost/helpers
+
+if [[ "$breakwhat" == "install" ]] || [[ "$breakwhat" == "everything" ]]; then
+    string_might_break='; WTF ; ?!() {{{{'
+else
+    string_might_break=''
+fi
+
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config || true # What could go wrong lol
