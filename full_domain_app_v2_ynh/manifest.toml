@@ -31,9 +31,9 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     type = "domain"
 
 [resources]
-    [resources.install_dir]
-
     [resources.system_user]
+
+    [resources.install_dir]
 
     [resources.permissions]
     main.url = "/"
