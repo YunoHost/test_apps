@@ -27,6 +27,11 @@ ram.runtime = "50M" # FIXME: replace with an **estimate** minimum ram requiremen
     # this is a generic question - ask strings are automatically handled by Yunohost's core
     type = "domain"
 
+    [install.path]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    example = "/"
+    default = "/"
+
     [install.breakwhat]
     type = "select"
     ask.en = "What script to break"
