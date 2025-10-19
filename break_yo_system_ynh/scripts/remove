@@ -1,16 +1,21 @@
-set -eux
+#!/bin/bash
+
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
 source /usr/share/yunohost/helpers
 
-# Retrieve arguments
-app=$YNH_APP_INSTANCE_NAME
-domain=$(sudo yunohost app setting $app domain)
-breakwhat=$(sudo yunohost app setting $app breakwhat)
+#=================================================
+# REMOVE NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing NGINX web server configuration..." --weight=2
 
-rm /etc/nginx/conf.d/$domain.d/$app.conf
-service nginx restart
+# Remove the dedicated NGINX config
+ynh_remove_nginx_config
 
-if [[ $breakwhat == "remove" ]] || [[ $breakwhat == "everything" ]]
-then
-    service nginx stop
+if [[ "$breakwhat" == "remove" ]] || [[ "$breakwhat" == "everything" ]]; then
+    systemctl stop nginx
 fi
