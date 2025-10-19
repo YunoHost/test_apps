@@ -3,45 +3,23 @@
 #=================================================
 # GENERIC START
 #=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Source YunoHost helpers
 source /usr/share/yunohost/helpers
 
-# Stop script if errors
-ynh_abort_if_errors
+#=================================================
+# SET CUSTOM PERMISSIONS
+#=================================================
+ynh_script_progression --message="Setting up permissions..." --weight=1
 
-# Retrieve arguments
-app=$YNH_APP_INSTANCE_NAME
-domain=$YNH_APP_ARG_DOMAIN
-domain_2=$YNH_APP_ARG_DOMAIN_2
-path_url=$(ynh_normalize_url_path $YNH_APP_ARG_PATH)
-admin_user=$YNH_APP_ARG_ADMIN
-is_public=$YNH_APP_ARG_IS_PUBLIC
 
-ynh_app_setting_set --app $app --key admin_user --value $admin_user
-ynh_app_setting_set --app $app --key domain_2 --value $domain_2
+ynh_permission_update --permission "admin" --add "$admin"
 
-# Check domain/path availability
-ynh_webpath_available $domain $path_url || ynh_die "$domain$path_url is not available, please use an other domain or path."
-ynh_webpath_register $app $domain $path_url
-
-ynh_permission_create --permission "admin" --url "/admin" --allowed "$admin_user" --protected true --show_tile true --auth_header true
-if [[ "$domain" == "$domain_2" ]]
-then
+if [[ "$domain" == "$domain_2" ]]; then
     url_for_domain_2=""
 else
     url_for_domain_2="$domain_2/"
 fi
 
-ynh_permission_create --permission "dev" --url "/dev" --additional_urls "/dev2" "/otherdev" $url_for_domain_2 --protected false --show_tile false --auth_header false
-ynh_permission_create --permission "test" --protected false
-ynh_permission_create --permission "trybreakssowat_1" --url "re:/break[a-z]*/" --protected false --show_tile true --auth_header true
-ynh_permission_create --permission "trybreakssowat_2" --protected false --show_tile true --auth_header true
-
-#=================================================
-# SETUP SSOWAT
-#=================================================
-ynh_script_progression --message="Configuring SSOwat..." --weight=1
-
-# Make app public if necessary or protect it
-[ $is_public -eq 0 ] || ynh_permission_update --permission "main" --add "visitors"
+ynh_permission_url --permission "dev" --add_url "/dev2" "/otherdev" "$url_for_domain_2"
