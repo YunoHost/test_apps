@@ -1,0 +1,47 @@
+#:schema https://raw.githubusercontent.com/YunoHost/apps/master/schemas/manifest.v2.schema.json
+packaging_format = 2
+
+id = "backup_recommended_app"
+name = "Backup (recommended-way) Test App"
+description.en = "App to test the 'recommanded' ways of doing backups"
+
+version = "1.0~ynh1"
+
+maintainers = ["Aleks"]
+
+[upstream]
+license = "GPL-3+"
+
+[integration]
+yunohost = ">= 12.0"
+architectures = "all"
+multi_instance = false
+ldap = "?"
+sso = "?"
+disk = "50M"
+ram.build = "50M"
+ram.runtime = "50M"
+
+    [install.domain]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    example = "domain.org"
+
+    [install.path]
+    # this is a generic question - ask strings are automatically handled by Yunohost's core
+    example = "/"
+    default = "/"
+
+    [install.helper_to_test]
+    ask.en = "Choose the restore helper to use for the test"
+    example = "ynh_restore"
+    default = "ynh_restore_file"
+
+    [resources.system_user]
+
+    [resources.install_dir]
+
+    [resources.permissions]
+    main.url = "/"
+
+    [resources.database]
+    type = "mysql"

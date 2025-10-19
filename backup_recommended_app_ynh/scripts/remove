@@ -1,19 +1,21 @@
-set -eux
+#!/bin/bash
 
-# Source app helpers
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source /usr/share/yunohost/helpers
 
-# Recover arguments
-app=$YNH_APP_INSTANCE_NAME
-domain=$(sudo yunohost app setting $app domain)
+#=================================================
+# REMOVE NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing NGINX web server configuration..." --weight=2
 
-sudo rm -rf /var/www/$app
-sudo rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+# Remove the dedicated NGINX config
+ynh_remove_nginx_config
+
+ynh_script_progression --message="Removing custom files..." --weight=2
+
 sudo rm -f /etc/importantfile
-
-db_user=$app
-ynh_mysql_drop_db $db_user
-ynh_mysql_drop_user $db_user
-
-sudo service nginx reload
-sudo yunohost app ssowatconf

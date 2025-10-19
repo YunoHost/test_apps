@@ -1,39 +1,33 @@
-set -eux
+#!/bin/bash
 
-# Retrieve arguments
-app=$YNH_APP_INSTANCE_NAME
-number=$YNH_APP_INSTANCE_NUMBER
-domain=$YNH_APP_ARG_DOMAIN
-path=$YNH_APP_ARG_PATH
-helper_to_test=$YNH_APP_ARG_HELPER_TO_TEST
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Source app helpers
 source /usr/share/yunohost/helpers
 
-# Check domain/path availability
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path
+#=================================================
+# STANDARD MODIFICATIONS
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression --message="Setting up source files..." --weight=1
 
-# Register mode of restoration
-ynh_app_setting_set $app helper_to_test $helper_to_test
+cp ../conf/index.html "$install_dir"
 
-# Add config for nginx
-sudo sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
-sudo sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
-sudo cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
-
-# Make directory for app web data
-sudo mkdir -p /var/www/$app
-sudo cp ../conf/index.html /var/www/$app
-
-# Create a dummy mysql db
-db_user=$app
-db_pwd="yoloswag42"
-ynh_mysql_create_db "$db_user" "$db_user" $db_pwd
-ynh_app_setting_set $app mysqlpwd $db_pwd
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
 # Other custom stuff
 sudo cp ../sources/importantfile /etc/
 
-# Reload Nginx and regenerate SSOwat conf
-sudo service nginx reload
-#sudo yunohost app ssowatconf
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
+
+# Create a dedicated NGINX config
+ynh_add_nginx_config

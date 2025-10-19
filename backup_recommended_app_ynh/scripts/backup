@@ -1,19 +1,45 @@
 #!/bin/bash
-set -eu
+
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
 source /usr/share/yunohost/helpers
 
-app=$YNH_APP_INSTANCE_NAME
-domain=$(ynh_app_setting_get $app domain)
+ynh_print_info "Declaring files to be backed up..."
 
-# Backup the app files
-ynh_backup /var/www/$app
+#=================================================
+# BACKUP THE APP MAIN DIR
+#=================================================
 
-# Backup the conf files
-ynh_backup /etc/nginx/conf.d/$domain.d/$app.conf
+ynh_backup "$install_dir"
+
+#=================================================
+# BACKUP SYSTEM CONFIGURATION
+#=================================================
+
+# Backup the NGINX configuration
+ynh_backup "/etc/nginx/conf.d/$domain.d/$app.conf"
+
+#=================================================
+# BACKUP VARIOUS FILES
+#=================================================
 
 # Backup the custom file to a different location
 ynh_backup /etc/importantfile /etc/yoloswag
 
-# Backup db
-ynh_mysql_dump_db $app > db.sql
+#=================================================
+# BACKUP THE MYSQL DATABASE
+#=================================================
+ynh_print_info "Backing up the MySQL database..."
+
+### (However, things like MySQL dumps *do* take some time to run, though the
+### copy of the generated dump to the archive still happens later)
+
+ynh_mysql_dump_db --database="$db_name" > db.sql
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_print_info "Backup script completed for $app. (YunoHost will then actually copy those files to the archive)."

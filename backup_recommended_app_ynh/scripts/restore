@@ -1,33 +1,41 @@
 #!/bin/bash
-set -eu
+
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
 source /usr/share/yunohost/helpers
 
-app=$YNH_APP_INSTANCE_NAME
-domain=$(ynh_app_setting_get $app domain)
-path=$(ynh_app_setting_get $app path)
-helper_to_test=$(ynh_app_setting_get $app helper_to_test)
-
 # Test the 2 alternatives to restore
 if [ "$helper_to_test" == "ynh_restore" ]; then
-    # Restore all backuped files
+    # Restore all backed up files
     ynh_restore
 else
-    # Restore www directory
-    ynh_restore_file /var/www/$app
+    ynh_restore_file "$install_dir"
+    chown -R "$app:www-data" "$install_dir"
 
-    # Restore nginx conf
-    ynh_restore_file /etc/nginx/conf.d/$domain.d/$app.conf
+    ynh_restore_file "/etc/nginx/conf.d/$domain.d/$app.conf"
 
-    # Restore custom file (with different source/destinations)
     ynh_restore_file /etc/yoloswag /etc/importantfile
+
 fi
 
-# Restore the database 
-db_user=$app
-db_name=$app
-db_pwd=$(ynh_app_setting_get $app mysqlpwd)
-ynh_mysql_setup_db --db_user=$db_name --db_name=$db_name --db_pwd=$db_pwd
-ynh_mysql_connect_as --user=$db_name --password=$db_pwd --database=$db_name < ./db.sql
+#=================================================
+# RESTORE THE MYSQL DATABASE
+#=================================================
+ynh_script_progression --message="Restoring the MySQL database..." --weight=1
 
-systemctl reload nginx
+ynh_mysql_connect_as --user="$db_user" --password="$db_pwd" --database="$db_name" < ./db.sql
+
+#=================================================
+# RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
+#=================================================
+ynh_script_progression "Reloading NGINX web server and $app's service..."
+
+ynh_systemd_action --service_name=nginx --action=reload
+
+#=================================================
+# END OF SCRIPT
+#=================================================
+
+ynh_script_progression "Restoration completed for $app"
