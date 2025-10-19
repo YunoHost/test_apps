@@ -1,22 +1,16 @@
-set -eux
+#!/bin/bash
 
-app=$YNH_APP_INSTANCE_NAME
-number=$YNH_APP_INSTANCE_NUMBER
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-# Retrieve arguments
-old_domain=$YNH_APP_OLD_DOMAIN
-old_path=$YNH_APP_OLD_PATH
-new_domain=$YNH_APP_NEW_DOMAIN
-new_path=$YNH_APP_NEW_PATH
+source /usr/share/yunohost/helpers
 
-nginx_conf_path=/etc/nginx/conf.d/$old_domain.d/$app.conf
+#=================================================
+# MODIFY URL IN NGINX CONF
+#=================================================
+ynh_script_progression --message="Updating NGINX web server configuration..."
 
-if [[ "$new_path" == "" ]]; then
-  sed -i "s@location .\+ {@location / {@g" $nginx_conf_path
-else
-  sed -i "s@location .\+ {@location $new_path {@g" $nginx_conf_path
-fi
-
-if [ $old_domain != $new_domain ]; then
-    mv $nginx_conf_path /etc/nginx/conf.d/$new_domain.d/$app.conf
-fi
+ynh_change_url_nginx_config

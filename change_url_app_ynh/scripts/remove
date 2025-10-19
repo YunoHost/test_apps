@@ -1,11 +1,17 @@
-set -eux
+#!/bin/bash
 
-# See comments in install script
-app=$YNH_APP_INSTANCE_NAME
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
 
-domain=$(yunohost app setting $app domain)
+source /usr/share/yunohost/helpers
 
-rm -rf /var/www/$app
-rm -f /etc/nginx/conf.d/$domain.d/$app.conf
+#=================================================
+# REMOVE NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Removing NGINX web server configuration..." --weight=2
 
-service nginx reload
+# Remove the dedicated NGINX config
+ynh_remove_nginx_config

@@ -1,39 +1,30 @@
-set -eux
+#!/bin/bash
 
-# Source app helpers
+#=================================================
+# GENERIC START
+#=================================================
+# IMPORT GENERIC HELPERS
+#=================================================
+
 source /usr/share/yunohost/helpers
 
-app=$YNH_APP_INSTANCE_NAME
-number=$YNH_APP_INSTANCE_NUMBER
+#=================================================
+# STANDARD MODIFICATIONS
+#=================================================
+# DOWNLOAD, CHECK AND UNPACK SOURCE
+#=================================================
+ynh_script_progression --message="Setting up source files..." --weight=1
 
-# Retrieve arguments
-domain=$YNH_APP_ARG_DOMAIN
-path=$YNH_APP_ARG_PATH
-is_public=$YNH_APP_ARG_IS_PUBLIC
+cp ../conf/index.html "$install_dir"
 
-# Check domain/path availability
-ynh_webpath_register --app=$app --domain=$domain --path_url=$path
+chmod 750 "$install_dir"
+chmod -R o-rwx "$install_dir"
+chown -R "$app:www-data" "$install_dir"
 
-if [[ "$path" == "" ]]; then
-  sed -i "s@PATHTOCHANGE@/@g" ../conf/nginx.conf
-else
-  sed -i "s@PATHTOCHANGE@$path@g" ../conf/nginx.conf
-fi
+#=================================================
+# NGINX CONFIGURATION
+#=================================================
+ynh_script_progression --message="Configuring NGINX web server..." --weight=2
 
-sed -i "s@FOLDER@$app/@g" ../conf/nginx.conf
-
-cp ../conf/nginx.conf /etc/nginx/conf.d/$domain.d/$app.conf
-
-mkdir -p /var/www/$app
-
-cp ../conf/index.html /var/www/$app
-
-# Reload Nginx and regenerate SSOwat conf
-service nginx reload
-
-yunohost app setting $app unprotected_uris -v "/"
-yunohost app ssowatconf
-
-if [ $is_public -eq 1 ]; then
-    ynh_permission_update --permission="main" --add="visitors"
-fi
+# Create a dedicated NGINX config
+ynh_add_nginx_config
