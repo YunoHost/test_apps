@@ -14,7 +14,7 @@ maintainers = ["bram"]
 license = "GPL-3+"
 
 [integration]
-yunohost = ">= 12.3"
+yunohost = ">= 12.1"
 architectures = "all"
 multi_instance = true
 ldap = "?"
